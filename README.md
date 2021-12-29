@@ -13,7 +13,7 @@ If time allows, additional information about these scripts are detailed below.
 
 So far, the hierarchy of bash scripts is flat in order to simplify calling a script from another one. The easiest to make sure that a script will work is to clone the repo in order to make sure that all scripts are accessible.
 
-## install_abba.sh
+# install_abba.sh
 
 This script simplifies the installation of [ABBA](https://biop.github.io/ijp-imagetoatlas/) (on windows so far, but probably also on mac if a nice contributor help us!).
 
@@ -42,3 +42,15 @@ This script internally uses the scripts `InstallQuPathExtension.groovy` and `Set
 **ONLY WINDOWS IS SUPPORTED NOW, CONTRIBUTIONS FOR MAC OS WELCOMED!**
 
 NOTE: If you would like a half automated install for more flexibility on the software installs, check https://github.com/enassar/ABBA-QuPath-utility-scripts, which performs automated downloads.
+
+# full_install_biop_fiji.sh
+
+This script downloads and install the standard 'BIOP' Fiji version (If you specify C:/ as the installation path). It calls sequentially the two scripts:
+
+## install_fiji.sh
+
+Downloads Fiji and updates it.
+
+## install_fiji_update_sites.sh
+
+Adds a selection of updates to the predownloaded Fiji (check the help to get the list)
