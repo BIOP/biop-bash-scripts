@@ -39,4 +39,6 @@ If you have issues with this script, please post your issue with as much details
 
 This script internally uses the scripts `InstallQuPathExtension.groovy` and `SetElastixPath.groovy`, which are run within Fiji.
 
-** ONLY WINDOWS IS SUPPORTED NOW, CONTRIBUTIONS FOR MAC OS WELCOMED!"
+**ONLY WINDOWS IS SUPPORTED NOW, CONTRIBUTIONS FOR MAC OS WELCOMED!**
+
+NOTE: If you would like a half automated install for more flexibility on the software installs, check https://github.com/enassar/ABBA-QuPath-utility-scripts, which performs automated downloads.
