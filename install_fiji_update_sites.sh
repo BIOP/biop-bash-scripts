@@ -171,6 +171,10 @@ echo "Enabling StarDist update site"
 echo "Enabling TensorFlow update site"
 "$fiji_path" --update add-update-site "TensorFlow" "https://sites.imagej.net/TensorFlow/"
 
+echo "Updating Fiji again" 
+"$fiji_path" --update update
+echo "Fiji should now be up-to-date"
+
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update
 echo "Fiji should now be up-to-date"
