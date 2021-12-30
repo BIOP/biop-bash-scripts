@@ -274,16 +274,12 @@ fi
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data\""
+argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.3\""
 argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.3\""
 argQuPathExtensionURL="quPathExtensionURL=\"$qupath_abba_extension_url\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
-
-# echo ------ Downloading Allen Brain Atlas ------
-# allen_brain_mouse_ccfv3_h5_url="https://zenodo.org/record/4486659/files/ccf2017-mod65000-border-centered-mm-bc.h5"
-# allen_brain_mouse_ccfv3_xml_url="https://zenodo.org/record/4486659/files/ccf2017-mod65000-border-centered-mm-bc.xml"
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"
@@ -291,4 +287,3 @@ rm -r "$temp_dl_dir"
 echo ------ INSTALLATION DONE ------
 echo "You should be able to run either Fiji or QuPath and access ABBA's functionalities"
 echo "If this script failed, please post the errors in forum.image.sc with the ABBA tag"
-pause 'Press [Enter] to end the script'
