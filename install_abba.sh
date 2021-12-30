@@ -15,7 +15,7 @@ function Help()
    echo "argument of this script. For instance: "
    echo ""
    echo "Windows:"
-   echo "./install_abba.sh C:/"
+   echo "./install_abba.sh \"C:/\""
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo
@@ -159,6 +159,12 @@ echo "Fiji updated"
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update
 echo "Fiji is now up-to-date"
+
+echo "Setting up default ABBA atlases folder"
+
+mkdir -p "$path_install/abba_atlases"
+
+echo -n "$path_install/abba_atlases">"$path_install/$fiji_os_subpath/Fiji.app/plugins/BIOP/ABBA_Atlas_folder.txt"
 
 # ------ SETTING UP ELASTIX ------
 echo ------ Setting up Elastix ------
