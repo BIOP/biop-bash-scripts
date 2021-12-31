@@ -16,13 +16,15 @@ So far, the hierarchy of bash scripts is flat in order to simplify calling a scr
 **WARNING: PLEASE CLOSE AND QUPATH WHEN EXECUTING THESE SCRIPTS**
 Otherwise jars cannot be deleted correctly. 
 
---------------- I want it all! --------------
+--------------- 
+I want it all! 
+--------------
 
 If you want a machine set up with Fiji and QuPath and extensions like the default one we have at the facility, just run:
 
-**full_install.sh**
+**./full_install.sh**
 
-And specify a path. We recommend `C:\` (with admin priviledge).
+And specify a path. We recommend `C:/` (with admin priviledge).
 
 The full install script executes sequentially:
 
@@ -32,7 +34,9 @@ The full install script executes sequentially:
 
 Normally running it multiple times is safe. Pre-installed components will be skipped (except for updating Fiji, which can take some time).
 
---------------- FIJI --------------------
+--------------- 
+FIJI 
+--------------------
 
 # full_install_biop_fiji.sh
 
@@ -49,7 +53,9 @@ Downloads Fiji and updates it.
 
 Adds a selection of update sites to the predownloaded Fiji (check the help to get the list)
 
---------------- QuPath --------------------
+--------------- 
+QuPath 
+--------------------
 
 # full_install_biop_qupath.sh
 
@@ -69,7 +75,9 @@ Downloads Fiji and install it.
 This is because the qupath extensions are installed from Fiji.
 Adds a selection of extensions to QuPath (check the help to get the list)
 
----------------- ABBA -------------------
+---------------- 
+ABBA 
+-------------------
 
 # full_install_abba.sh
 
