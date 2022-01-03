@@ -249,7 +249,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
-	qupath_path="$path_install/QuPath.app/$qupath_executable_file"
+	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
 	echo "$qupath_path"
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
