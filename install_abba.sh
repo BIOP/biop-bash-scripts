@@ -254,10 +254,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
 	else
-		echo "QuPath not present, downloading it from $qupath_url you will need to enter your password for the install"
+		echo "QuPath not present, downloading it from $qupath_url"
 		qupath_zip_path="$temp_dl_dir/qupath.pkg"
 		curl "$qupath_url" -L -# -o "$qupath_zip_path"
-		echo "Installing QuPath"
+		echo "Installing QuPath, you will need to enter your admin password for the install (or install QuPath before running the script)"
 		sudo installer -pkg "$qupath_zip_path" -target /
 		if [[ -f "$qupath_path" ]]; then
 			echo "QuPath successfully installed"

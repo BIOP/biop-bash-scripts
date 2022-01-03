@@ -100,9 +100,26 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Mac OSX unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	qupath_executable_file="Contents/MacOS/QuPath"
+	qupath_path="$path_install/QuPath.app/$qupath_executable_file"
+	echo "$qupath_path"
+	if [[ -f "$qupath_path" ]]; then
+		echo "QuPath detected, bypassing installation"
+	else
+		qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
+		echo "QuPath not present, downloading it from $qupath_url"
+		qupath_zip_path="$temp_dl_dir/qupath.pkg"
+		curl "$qupath_url" -L -# -o "$qupath_zip_path"
+		echo "Installing QuPath, you will need to enter your admin password for the install (or install QuPath before running the script)"
+		sudo installer -pkg "$qupath_zip_path" -target /
+		if [[ -f "$qupath_path" ]]; then
+			echo "QuPath successfully installed"
+		else
+			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less privilege"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed
+		fi
+	fi
 elif [[ "$OSTYPE" == "msys" ]]; then
 	qupath_executable_file="QuPath-${qupath_version}.exe"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Windows.zip"

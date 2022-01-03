@@ -151,20 +151,20 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Mac OSX unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	qupath_executable_file="Contents/MacOS/QuPath"
+	qupath_path="$path_install/QuPath.app/$qupath_executable_file"
 elif [[ "$OSTYPE" == "msys" ]]; then
 	qupath_executable_file="QuPath-${qupath_version}.exe"
 	qupath_path="$path_install/QuPath-${qupath_version}/$qupath_executable_file"
-	if [[ -f "$qupath_path" ]]; then
+fi
+
+if [[ -f "$qupath_path" ]]; then
 		echo "QuPath correctly detected"
 	else
 		echo "QuPath is not installed, please install it before running this script"
 		pause "Press [Enter] to end the script"
 		exit 1 # We cannot proceed
 	fi	
-fi
 
 echo ------ Setting up QuPath extension ------
 

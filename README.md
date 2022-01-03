@@ -1,20 +1,25 @@
 # BIOP BASH SCRIPTS
 
-**ONLY WINDOWS IS SUPPORTED, CONTRIBUTIONS FOR MAC OS WELCOMED!**
+**ONLY WINDOWS AND MAC-OSX ARE SUPPORTED, CONTRIBUTIONS FOR LINUX WELCOMED!**
 
 This repository contains bash scripts which should ideally simplify your life when working with QuPath and Fiji.
 
-Ideally these scripts should automatically download, install and configure several tools, in a platform independent manner, and with minimal work.
+These scripts should automatically download (internet connectino required!), install and configure several tools, in a platform independent manner, and with minimal work.
 
-You can get the help for any of these bash scripts with:
+You can get a help for any of these bash scripts with:
 `./myscript.sh -h`
 
-**IMPORTANT: on windows, you need to install the 64bits version of [Git4Windows](https://git-scm.com/download/win) in order to execute these bash scripts.**
+**IMPORTANT: on windows, you need to install the 64bits version of [Git4Windows](https://git-scm.com/download/win) in order to execute these bash scripts.** Otherwise windows does not know what to do with `.sh` files. You can keep all settings to the default ones when installing Git for windows.
 
-So far, the hierarchy of bash scripts is flat in order to simplify calling a script from another one. The easiest to make sure that a script will work is to download the full repo in order to make sure that all scripts are accessible.
+So far, the hierarchy of bash scripts is flat in order to simplify the call of a script from another one. The easiest to make sure that a script will work is to download the full repo (Code>Download ZIP) in order to make sure that all scripts are accessible. Do not forget to unzip the zip file before running these scripts!
 
-**WARNING: PLEASE CLOSE AND QUPATH WHEN EXECUTING THESE SCRIPTS**
-Otherwise jars cannot be deleted correctly. 
+**WARNING: PLEASE CLOSE FIJI AND QUPATH WHEN EXECUTING THESE SCRIPTS**
+Otherwise jars cannot be deleted correctly. Which means that some plugins and update sites will not be successfully installed.
+
+We recommend the following installation path:
+
+* Windows: `C:/`
+* Mac-OSX: `/Applications/` (
 
 --------------- 
 I want it all! 
