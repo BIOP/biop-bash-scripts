@@ -174,9 +174,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Mac OSX unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	elastix_os_subpath="elastix-$elastix_version-mac"
+	elastix_executable_file="bin/elastix"
+	transformix_executable_file="bin/transformix"
+	elastix_url="https://github.com/SuperElastix/elastix/releases/download/${elastix_version}/elastix-${elastix_version}-mac.zip"
 elif [[ "$OSTYPE" == "msys" ]]; then
 	elastix_os_subpath="elastix-$elastix_version-win64"
 	elastix_executable_file="elastix.exe"
@@ -227,7 +228,7 @@ fi
 if [[ -f "$elastix_path" ]]; then
     echo "Elastix successfully installed."
 else
-	echo "Elastix installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
+	echo "Elastix installation failed, please retry with administrator rights or install in a folder requiring less privilege"
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 fi
@@ -246,9 +247,26 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Mac OSX unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	qupath_executable_file="Contents/MacOS/QuPath"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
+	qupath_path="$path_install/QuPath.app/$qupath_executable_file"
+	echo "$qupath_path"
+	if [[ -f "$qupath_path" ]]; then
+		echo "QuPath detected, bypassing installation"
+	else
+		echo "QuPath not present, downloading it from $qupath_url you will need to enter your password for the install"
+		qupath_zip_path="$temp_dl_dir/qupath.pkg"
+		curl "$qupath_url" -L -# -o "$qupath_zip_path"
+		echo "Installing QuPath"
+		sudo installer -pkg "$qupath_zip_path" -target /
+		if [[ -f "$qupath_path" ]]; then
+			echo "QuPath successfully installed"
+		else
+			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less privilege"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed
+		fi
+	fi
 elif [[ "$OSTYPE" == "msys" ]]; then
 	qupath_executable_file="QuPath-${qupath_version}.exe"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Windows.zip"
