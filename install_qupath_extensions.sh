@@ -123,9 +123,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Mac OSX unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	fiji_os_subpath="fiji-macosx"
+	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
+	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
 elif [[ "$OSTYPE" == "msys" ]]; then
 	fiji_os_subpath="fiji-win64"
 	fiji_executable_file="ImageJ-win64.exe"
