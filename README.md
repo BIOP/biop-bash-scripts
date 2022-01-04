@@ -6,7 +6,7 @@ This repository contains bash scripts which should ideally simplify your life wh
 
 These scripts should automatically download (internet connection required!), install, update and configure several tools, in a platform independent manner.
 
-**If you have issues with these scripts, please post your issue with as much details as possible in [`forum.image.sc`](https://forum.image.sc/) and add the `ABBA` tag.**
+**If you have issues with these scripts, please post your issue with as much details as possible (script used, your OS + error messages) in [`forum.image.sc`](https://forum.image.sc/)**
 
 You can get a help for any of these bash scripts with:
 `./myscript.sh -h`
@@ -28,7 +28,9 @@ If you install on a path with space characters, use double quotes, for instance:
 
 If you execute a script without specifying any path, you will be asked for one.
 
-The `full_install*` scripts are executing sequentially downstream install scripts. If you are interested in Fiji only, you can directly execute a downstream script. The way scripts are calling one another is shown below:
+The `full_install*` scripts are executing sequentially downstream install scripts. If you are interested in Fiji only, you can directly execute a downstream script (like only `install_fiji`). 
+
+The way scripts are calling one another is shown below:
 
 ```bash
 full_install
@@ -43,7 +45,11 @@ full_install
     └── install_abba_atlases
 ```
 
-Running scripts multiple times is safe. Pre-installed components are automatically detected and will not be downloaded a second time. However Fiji is always updated multiple times for each re-run, which can take some time.
+If you run the `full_install` script you will thus run all scripts sequentially, except `install_warpy.sh`.
+
+`install_warpy.sh` is an isolated script because it is installing a subset of the components of ABBA. So, if you use `install_abba`, you will get Warpy as well, but if you want Warpy only, you can use the warpy script instead.
+
+> Running scripts multiple times is safe. Pre-installed components are automatically detected and will not be downloaded a second time. However Fiji is always updated multiple times for each re-run, which can take some time.
 
 # I want it all! 
 
@@ -84,7 +90,16 @@ Downloads QuPath and installs it.
 This is because the qupath extensions are installed from Fiji.
 This script adds a selection of extensions to QuPath (check the help to get the list).
 
-# ABBA 
+# [Warpy](https://c4science.ch/w/warpy/)
+
+## install_warpy.sh
+
+This script downloads, install, and configure all components needed to use [Warpy](https://c4science.ch/w/warpy/):
+* Fiji (+ Bigdataviewer-Playground update site)
+* QuPath (+ Warpy extension)
+* Elastix
+
+# [ABBA](https://biop.github.io/ijp-imagetoatlas/) 
 
 ## full_install_abba.sh
 
