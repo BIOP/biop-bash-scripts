@@ -108,16 +108,14 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	fiji_os_subpath="fiji-macosx"
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
 elif [[ "$OSTYPE" == "msys" ]]; then
-	fiji_os_subpath="fiji-win64"
 	fiji_executable_file="ImageJ-win64.exe"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-win64.zip"
 fi
 
-fiji_path="$path_install/$fiji_os_subpath/Fiji.app/$fiji_executable_file"
+fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 
 echo "Looking for Fiji executable: $fiji_path"
 if [[ -f "$fiji_path" ]]; then
