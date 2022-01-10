@@ -17,6 +17,9 @@ function Help()
    echo ""
    echo "Windows:"
    echo "./full_install.sh C:/"
+   echo 
+   echo "Mac:"
+   echo "./full_install.sh /Applications/"
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo

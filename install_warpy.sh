@@ -152,7 +152,7 @@ echo "Updating Fiji"
 echo "Fiji updated"
 
 echo "Enabling Bigdataviewer-Playground update site"
-"$fiji_path" --update add-update-site "Bdv-Playground" "https://biop.epfl.ch/Fiji-Bdv-Playground-Exp/"
+"$fiji_path" --update add-update-site "Bdv-Playground" "https://biop.epfl.ch/Fiji-Bdv-Playground/"
 echo "Bigdataviewer-Playground update site enabled"
 
 echo "Updating Fiji"

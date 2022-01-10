@@ -16,6 +16,9 @@ function Help()
    echo ""
    echo "Windows:"
    echo "./full_install_biop_fiji.sh C:/"
+   echo 
+   echo "Mac:"
+   echo "./full_install_biop_fiji.sh /Applications/"
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo

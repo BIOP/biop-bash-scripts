@@ -19,6 +19,9 @@ function Help()
    echo ""
    echo "Windows:"
    echo "./install_qupath_extensions.sh \"C:/\""
+   echo 
+   echo "Mac:"
+   echo "./install_qupath_extensions.sh /Applications/"
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo

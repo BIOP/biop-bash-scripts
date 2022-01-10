@@ -28,6 +28,9 @@ function Help()
    echo ""
    echo "Windows:"
    echo "./install_fiji_update_sites.sh C:/"
+   echo 
+   echo "Mac:"
+   echo "./install_fiji_update_sites.sh /Applications/"
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo
