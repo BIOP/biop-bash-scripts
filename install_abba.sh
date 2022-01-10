@@ -89,14 +89,14 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path for ABBA's components"
+	echo "Please enter the installation path (windows: \"C:/\", mac: /Applications/)"
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
 		path_install=$1
 	else
 		echo $1 is not a valid path
-		echo "Please enter the installation path for ABBA's components"
+		echo "Please enter the installation path"
 		getuserdir path_install
 	fi	
 fi
