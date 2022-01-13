@@ -13,6 +13,7 @@ function Help()
    echo "  - https://github.com/BIOP/qupath-extension-cellpose"
    echo "  - https://github.com/BIOP/qupath-extension-warpy"
    echo "  - https://github.com/BIOP/qupath-extension-abba"
+   echo "  - https://github.com/qupath/qupath-extension-stardist"
    echo
    echo "You should specify the folder where qupath is installed"
    echo "argument of this script. For instance: "
@@ -64,6 +65,7 @@ biop_extension_version=1.0.3
 cellpose_extension_version=0.3.0
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.1
+stardist_extension_version=0.3.0
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
@@ -72,6 +74,8 @@ cellpose_extension_url="https://github.com/BIOP/qupath-extension-cellpose/releas
 warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
 
 abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
+
+stardist_extension_url="https://github.com/qupath/qupath-extension-stardist/releases/download/v${stardist_extension_version}/qupath-extension-stardist-${abba_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
 
@@ -95,6 +99,7 @@ echo "- BIOP Extension: $biop_extension_version"
 echo "- CellPose Extension: $cellpose_extension_version"
 echo "- Warpy Extension: $warpy_extension_version"
 echo "- ABBA Extension: $abba_extension_version"
+echo "- Stardist Extension: $stardist_extension_version"
 
 # ------- INSTALLATION PATH VALIDATION
 
@@ -195,6 +200,13 @@ all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitA
 echo "--- Installing ABBA extension"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$abba_extension_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+echo "$all_args"
+"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+
+echo "--- Installing Stardist extension"
+
+argQuPathExtensionURL="quPathExtensionURL=\"$stardist_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
