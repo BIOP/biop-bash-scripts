@@ -75,7 +75,7 @@ warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/dow
 
 abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
 
-stardist_extension_url="https://github.com/qupath/qupath-extension-stardist/releases/download/v${stardist_extension_version}/qupath-extension-stardist-${abba_extension_version}.zip"
+stardist_extension_url="https://github.com/qupath/qupath-extension-stardist/releases/download/v${stardist_extension_version}/qupath-extension-stardist-${stardist_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
 
