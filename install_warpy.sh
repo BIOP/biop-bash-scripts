@@ -56,7 +56,7 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.3.1
+qupath_version=0.3.2
 warpy_extension_version=0.2.0
 elastix_version=5.0.1
 
