@@ -10,17 +10,22 @@ These scripts should automatically download (internet connection required!), ins
 
 To execute scripts, download the full repository as zip (green Code button > Download ZIP) and do not forget to unzip the zip file before running any of these scripts!
 
-> **Windows**: you need to install the 64bits version of [Git4Windows](https://git-scm.com/download/win) in order to execute these bash scripts. (`.sh` files). You can keep all settings to the default ones with the installer. Then simply double click the `.sh` file of your choice.
+## Windows
+You need to install the 64bits version of [Git4Windows](https://git-scm.com/download/win) in order to execute these bash scripts. (`.sh` files). You can keep all settings to the default ones with the installer. Then simply double click the `.sh` file of your choice.
 
-> **Mac-OSX**: you need to right-click a `.command` file and select `Open`. Then you can force the execution of the scripts. Otherwise the OS will prevent you from executing the scripts. Do not double-click the `.sh` files since it will open a text editor.
+## Mac-OSX
+You need to right-click a `.command` file and select `Open`. Then you can force the execution of the scripts. Otherwise the OS will prevent you from executing the scripts. Do not double-click the `.sh` files since it will open a text editor.
 
-> **Linux**: simply executing the sh scripts should work, but this has not been tested.
+## Linux
+Simply executing the sh scripts should work, but this has not been tested.
 
+## Scripts help
 You can get a help for any of these bash scripts on a terminal with:
 `./myscript.sh -h`
 
 > **You have to close Fiji and QuPath when executing these scripts**. Otherwise jars cannot be deleted correctly during updates.
 
+## Installation Path
 Each script can take a path as an argument for the installation. Otherwise a path will be asked. We highly recommend the following path:
 
 * Windows: `C:/`
@@ -29,6 +34,8 @@ Each script can take a path as an argument for the installation. Otherwise a pat
 If you install on a path with space characters, use double quotes, for instance:
 
 `./full_install.sh "C:/Program Files/"`
+
+## Scripts hierarchy
 
 The `full_install*` scripts are executing sequentially downstream install scripts. If you are interested in Fiji only, you can directly execute a downstream script (like only `install_fiji`). 
 
