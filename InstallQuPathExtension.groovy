@@ -44,7 +44,6 @@
 #@String(label="URL of QuPath Extension to install") quPathExtensionURL
 #@Boolean(lable="Quit after installation") quitAfterInstall
 
-IJ.log("Coucou")
 IJ.log(defaultQuPathUserPath)
 IJ.log(quPathPrefsNode)
 IJ.log(quPathExtensionURL)
