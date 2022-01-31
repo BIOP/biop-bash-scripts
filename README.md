@@ -16,6 +16,8 @@ You need to install the 64bits version of [Git4Windows](https://git-scm.com/down
 ## Mac-OSX
 You need to right-click a `.command` file and select `Open`. Then you can force the execution of the scripts. Otherwise the OS will prevent you from executing the scripts. Do not double-click the `.sh` files since it will open a text editor.
 
+If you get an error message, please [grant the terminal application with full disk access](https://osxdaily.com/2018/10/09/fix-operation-not-permitted-terminal-error-macos/)
+
 ## Linux
 Simply executing the sh scripts should work, but this has not been tested.
 
