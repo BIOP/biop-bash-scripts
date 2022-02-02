@@ -137,9 +137,23 @@ echo "Updating Fiji"
 "$fiji_path" --update update
 echo "Fiji updated"
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the folder not read only"
+	chflags -R nouchg "$path_install/Fiji.app"
+	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+	chmod -R a+w "$path_install/Fiji.app"
+fi
+
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update
 echo "Fiji should now be up-to-date"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the folder not read only"
+	chflags -R nouchg "$path_install/Fiji.app"
+	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+	chmod -R a+w "$path_install/Fiji.app"
+fi
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"
