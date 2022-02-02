@@ -134,6 +134,12 @@ else
 	curl "$fiji_url" -# -o "$fiji_zip_path"
 	echo "Unzipping Fiji in $path_install"
 	unzip "$fiji_zip_path" -d "$path_install/"
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+    		echo "Your OS: Mac OSX, make the folder not read only"
+		chflags -R nouchg "$path_install/Fiji.app"
+		xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+    		chmod -R a+w "$path_install/Fiji.app"
+	fi
 fi
 
 if [[ -f "$fiji_path" ]]; then
@@ -160,6 +166,13 @@ echo "Fiji updated"
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update
 echo "Fiji is now up-to-date"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the folder not read only"
+	chflags -R nouchg "$path_install/Fiji.app"
+	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+	chmod -R a+w "$path_install/Fiji.app"
+fi
 
 echo "Setting up default ABBA atlases folder"
 
@@ -302,6 +315,11 @@ all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitA
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the qupath extension folder not read only"
+	chmod -R a+w "$path_install/QuPath Common Data_0.3"
+fi
 
 echo ------ INSTALLATION DONE ------
 echo "You should be able to run either Fiji or QuPath and access ABBA's functionalities"
