@@ -120,6 +120,7 @@ else
     		echo "Your OS: Mac OSX, make the folder not read only"
 		chflags -R nouchg "$path_install/Fiji.app"
 		xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+    		chmod -R a+w "$path_install/Fiji.app"
 	fi
 fi
 
