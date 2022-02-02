@@ -116,6 +116,11 @@ else
 	curl "$fiji_url" -# -o "$fiji_zip_path"
 	echo "Unzipping Fiji in $path_install"
 	unzip "$fiji_zip_path" -d "$path_install/"
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+    		echo "Your OS: Mac OSX, make the folder not read only"
+		chflags -R nouchg "$path_install/Fiji.app"
+		xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+	fi
 fi
 
 if [[ -f "$fiji_path" ]]; then
