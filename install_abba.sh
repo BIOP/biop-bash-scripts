@@ -55,7 +55,7 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.3.1
+qupath_version=0.3.2
 abba_extension_version=0.1.1
 elastix_version=5.0.1
 
