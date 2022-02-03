@@ -129,5 +129,11 @@ else
 	curl "https://zenodo.org/record/5644162/files/WHS_SD_rat_atlas_v4.h5" -L -# -o "$h5_path"
 fi
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the folder not read only"
+	chflags -R nouchg "$path_install/abba_atlases"
+	xattr -rd com.apple.quarantine "$path_install/abba_atlases"
+	chmod -R a+w "$path_install/abba_atlases"
+fi
 
 echo ------ DONE ------
