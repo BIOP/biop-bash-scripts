@@ -178,6 +178,8 @@ echo "Setting up default ABBA atlases folder"
 
 mkdir -p "$path_install/abba_atlases"
 
+mkdir -p "$path_install/Fiji.app/plugins/BIOP"
+
 echo -n "$path_install/abba_atlases">"$path_install/Fiji.app/plugins/BIOP/ABBA_Atlas_folder.txt"
 
 # ------ SETTING UP ELASTIX ------
