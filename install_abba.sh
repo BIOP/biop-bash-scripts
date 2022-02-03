@@ -167,13 +167,6 @@ echo "Updating Fiji one last time"
 "$fiji_path" --update update
 echo "Fiji is now up-to-date"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-	echo "Your OS: Mac OSX, make the folder not read only"
-	chflags -R nouchg "$path_install/Fiji.app"
-	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
-	chmod -R a+w "$path_install/Fiji.app"
-fi
-
 echo "Setting up default ABBA atlases folder"
 
 mkdir -p "$path_install/abba_atlases"
@@ -181,6 +174,13 @@ mkdir -p "$path_install/abba_atlases"
 mkdir -p "$path_install/Fiji.app/plugins/BIOP"
 
 echo -n "$path_install/abba_atlases">"$path_install/Fiji.app/plugins/BIOP/ABBA_Atlas_folder.txt"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "Your OS: Mac OSX, make the folder not read only"
+	chflags -R nouchg "$path_install/Fiji.app"
+	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
+	chmod -R a+w "$path_install/Fiji.app"
+fi
 
 # ------ SETTING UP ELASTIX ------
 echo ------ Setting up Elastix ------
