@@ -11,7 +11,6 @@ function Help()
    echo "The following sites are automatically installed:"
    echo "    - 3D Image Suite"   
    echo "    - ABBA"
-   echo "    - BigStitcher"
    echo "    - Bio-Formats"
    echo "    - CSBDeep"
    echo "    - Fiji-EasyXT"
@@ -139,8 +138,8 @@ echo "3D ImageJ Suite"
 echo "Enabling ABBA update site"
 "$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA-Exp/"
 
-echo "Enabling BigStitcher update site"
-"$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
+# echo "Enabling BigStitcher update site"
+# "$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
 
 echo "Enabling Bio-Formats update site"
 "$fiji_path" --update add-update-site "Bio-Formats" "https://sites.imagej.net/Bio-Formats/"
