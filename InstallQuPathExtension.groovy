@@ -48,6 +48,8 @@ IJ.log(defaultQuPathUserPath)
 IJ.log(quPathPrefsNode)
 IJ.log(quPathExtensionURL)
 
+defaultQuPathUserPath = new File(defaultQuPathUserPath).getAbsolutePath() // avoid double slash issues
+
 // Check pre-existing QuPath user Path
 Preferences prefs = Preferences.userRoot().node(quPathPrefsNode);
 def allKeys = prefs.keys() as List
