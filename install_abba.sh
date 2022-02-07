@@ -56,7 +56,7 @@ function getuserdir(){
 
 # ----------------- COMPONENTS VERSION -----------
 qupath_version=0.3.2
-abba_extension_version=0.1.1
+abba_extension_version=0.1.2
 elastix_version=5.0.1
 
 qupath_abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
