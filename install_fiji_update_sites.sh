@@ -136,7 +136,7 @@ echo "3D ImageJ Suite"
 "$fiji_path" --update add-update-site "3D ImageJ Suite" "https://sites.imagej.net/Tboudier/"
 
 echo "Enabling ABBA update site"
-"$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA-Exp/"
+"$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA/"
 
 # echo "Enabling BigStitcher update site"
 # "$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
