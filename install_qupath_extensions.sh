@@ -62,10 +62,10 @@ function getuserdir(){
 qupath_version=0.3.2
 
 biop_extension_version=1.0.3
-cellpose_extension_version=0.3.5
+cellpose_extension_version=0.3.7
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.3
-stardist_extension_version=0.3.0
+stardist_extension_version=0.3.1
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
