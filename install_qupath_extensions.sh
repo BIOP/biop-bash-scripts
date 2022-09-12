@@ -62,7 +62,7 @@ function getuserdir(){
 qupath_version=0.3.2
 
 biop_extension_version=1.0.4
-cellpose_extension_version=0.3.10
+cellpose_extension_version=0.4.1
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.3
 stardist_extension_version=0.3.1
