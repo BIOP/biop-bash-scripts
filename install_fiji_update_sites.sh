@@ -135,9 +135,6 @@ echo "Fiji updated"
 echo "3D ImageJ Suite"
 "$fiji_path" --update add-update-site "3D ImageJ Suite" "https://sites.imagej.net/Tboudier/"
 
-echo "Enabling ABBA update site"
-"$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA/"
-
 # echo "Enabling BigStitcher update site"
 # "$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
 
@@ -158,9 +155,6 @@ echo "Enabling IJPB-plugins update site"
 
 echo "Enabling ImageScience update site"
 "$fiji_path" --update add-update-site "ImageScience" "https://sites.imagej.net/ImageScience/"
-
-echo "Enabling Operetta Importer update site"
-"$fiji_path" --update add-update-site "Operetta Importer" "https://biop.epfl.ch/update-sites/operetta/"
 
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
