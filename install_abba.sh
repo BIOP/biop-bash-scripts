@@ -156,7 +156,7 @@ echo "Updating Fiji"
 echo "Fiji updated"
 
 echo "Enabling ABBA update site"
-"$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA/"
+"$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
 echo "ABBA update site enabled"
 
 echo "Updating Fiji"
