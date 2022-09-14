@@ -144,9 +144,6 @@ echo "Enabling Bio-Formats update site"
 echo "Enabling CSBDeep update site"
 "$fiji_path" --update add-update-site "CSBDeep" "https://sites.imagej.net/CSBDeep/"
 
-echo "Enabling Fiji-EasyXT update site"
-"$fiji_path" --update add-update-site "Fiji-EasyXT" "https://biop.epfl.ch/Fiji-EasyXT/"
-
 echo "Enabling IBMP-CNRS update site"
 "$fiji_path" --update add-update-site "IBMP-CNRS" "https://sites.imagej.net/Mutterer/"
 
