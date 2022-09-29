@@ -78,7 +78,7 @@ else
 fi
 echo "- Latest ImageJ/Fiji"
 echo -e " \t - Update Fiji"
-echo -e " \t - Enable ABBA Update Site"
+echo -e " \t - Enable PTBIOP Update Site"
 echo "- QuPath version: $qupath_version"
 echo "- Elastix version: $elastix_version"
 echo "- ABBA QuPath Extension: $abba_extension_version"
@@ -155,9 +155,9 @@ echo "Updating Fiji"
 "$fiji_path" --update update
 echo "Fiji updated"
 
-echo "Enabling ABBA update site"
+echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
-echo "ABBA update site enabled"
+echo "PTBIOP update site enabled"
 
 echo "Updating Fiji"
 "$fiji_path" --update update
