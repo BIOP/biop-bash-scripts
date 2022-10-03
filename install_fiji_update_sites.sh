@@ -15,7 +15,8 @@ function Help()
    echo "    - IBMP-CNRS"
    echo "    - IJPB-Plugins"
    echo "    - ImageScience"
-   echo "    - PTBIOP (obviously)"
+   echo "    - PTBIOP"
+   echo "    - ilastik"
    echo "    - Stardist"
    echo "    - TensorFlow"
    echo
@@ -152,6 +153,9 @@ echo "Enabling ImageScience update site"
 
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
+
+echo "Enabling ilastik update site"
+"$fiji_path" --update add-update-site "ilastik" "https://sites.imagej.net/Ilastik/"
 
 echo "Enabling StarDist update site"
 "$fiji_path" --update add-update-site "StarDist" "https://sites.imagej.net/StarDist/"
