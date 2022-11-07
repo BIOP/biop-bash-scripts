@@ -174,7 +174,7 @@ if [[ -f "$qupath_path" ]]; then
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.3\""
+argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath_Common_Data_0.3\""
 argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.3\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 
