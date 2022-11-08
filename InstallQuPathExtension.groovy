@@ -25,16 +25,16 @@
  * Example of url extension which can be installed with this script:
  * 
  * BIOP extensions:
- * https://github.com/BIOP/qupath-extension-biop/releases/download/v1.0.2/qupath-extension-biop-1.0.2.jar
+ * https://github.com/BIOP/qupath-extension-biop/releases/download/v1.0.2/qupath-extension-biop-x.y.z.jar
  * 
  * Warpy:
- * https://github.com/BIOP/qupath-extension-warpy/releases/download/0.2.0/qupath-extension-warpy-0.2.0.zip
+ * https://github.com/BIOP/qupath-extension-warpy/releases/download/0.2.0/qupath-extension-warpy-x.y.z.zip
  * 
  * ABBA:
- * https://github.com/BIOP/qupath-extension-abba/releases/download/0.1.1/qupath-extension-abba-0.1.1.zip
+ * https://github.com/BIOP/qupath-extension-abba/releases/download/0.1.1/qupath-extension-abba-x.y.z.zip
  * 
  * Cellpose:
- * https://github.com/BIOP/qupath-extension-cellpose/releases/download/v0.3.0/qupath-extension-cellpose-0.3.0.jar
+ * https://github.com/BIOP/qupath-extension-cellpose/releases/download/v0.3.0/qupath-extension-cellpose-x.y.z.jar
  * 
  * Author: Nicolas Chiaruttini, BIOP, EPFL 2021
  **/ 
@@ -90,6 +90,23 @@ def url = new URL(quPathExtensionURL)
 String fName = FilenameUtils.getName(url.getPath())
 String extension = FilenameUtils.getExtension(url.getPath())
 
+def isOmeroDependencies = false
+
+// Download all OMERO jars is long. We do not want to redo it, unless the version is new.
+if (fName.contains("OMERO.java-")) {
+	isOmeroDependencies = true
+	IJ.log("It's the OMERO dependencies... checking if they are already installed");
+	// https://github.com/ome/openmicroscopy/releases/download/v5.6.5/OMERO.java-5.6.5-ice36-b233.zip
+	def expectedFolderName = fName.substring(0, fName.length()-4)
+	def expectedOmeroFolderDependencies = new File(extensionsDir,expectedFolderName)
+	if (expectedOmeroFolderDependencies.exists()) {
+		IJ.log("Java OMERO depedencies are already installed - skipping");
+	} else {
+		IJ.log("Java OMERO depedencies are not installed - installing now...");
+	}	
+}
+
+
 def outputFile = new File(extensionsDir, fName)
 
 IJ.log("Starting download")
@@ -117,6 +134,16 @@ if (extension.equals("zip")) {
 	}
 	IJ.log("Unzipping done")
 	outputFile.delete()
+	// OMERO special case handle: it contains a folder within a folder... So we need to move jars from the libs folder one way up in the hierarchy
+	if (quPathExtensionURL.contains('OMERO.java-')) {
+		IJ.log("It's the OMERO dependencies, we need to move the jars one way up, or else QuPath do not see them")
+		def expectedFolderName = fName.substring(0, fName.length()-4) // remove zip extension
+		def sourceFolder = new File(extensionsDir,expectedFolderName+File.separator+"libs")
+		def destFolder = new File(extensionsDir,expectedFolderName)
+		for (File file : sourceFolder.listFiles()) {
+			file.renameTo(new File(destFolder, file.getName()));
+        }		
+	}
 }
 
 // Cleans old jars
