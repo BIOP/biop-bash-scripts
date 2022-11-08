@@ -15,6 +15,7 @@ function Help()
    echo "    - IBMP-CNRS"
    echo "    - IJPB-Plugins"
    echo "    - ImageScience"
+   echo "    - OMERO 5.5-5.6"
    echo "    - PTBIOP"
    echo "    - ilastik"
    echo "    - Stardist"
@@ -150,6 +151,9 @@ echo "Enabling IJPB-plugins update site"
 
 echo "Enabling ImageScience update site"
 "$fiji_path" --update add-update-site "ImageScience" "https://sites.imagej.net/ImageScience/"
+
+echo "Enabling OMERO 5.5-5.6 update site"
+"$fiji_path" --update add-update-site "OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
 
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
