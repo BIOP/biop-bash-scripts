@@ -101,7 +101,7 @@ Downloads QuPath and installs it.
 This is because the qupath extensions are installed from Fiji.
 This script adds a selection of extensions to QuPath (check the help to get the list).
 
-# [Warpy](https://c4science.ch/w/warpy/)
+# [Warpy](https://imagej.net/plugins/bdv/warpy/warpy)
 
 ## install_warpy
 
