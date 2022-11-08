@@ -101,6 +101,11 @@ if (fName.contains("OMERO.java-")) {
 	def expectedOmeroFolderDependencies = new File(extensionsDir,expectedFolderName)
 	if (expectedOmeroFolderDependencies.exists()) {
 		IJ.log("Java OMERO depedencies are already installed - skipping");
+		if (quitAfterInstall) {
+			IJ.run("Quit");
+		} else {
+			return
+		}
 	} else {
 		IJ.log("Java OMERO depedencies are not installed - installing now...");
 	}	
