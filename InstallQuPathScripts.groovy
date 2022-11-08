@@ -43,10 +43,10 @@ def userPath = prefs.get("userPath", defaultQuPathUserPath)
 if (userPath.equals(defaultQuPathUserPath)) {
 	IJ.log("Setting java prefs because the pref may not exist")
 	prefs.put("userPath", defaultQuPathUserPath)
-	prefs.put("scriptsPath", defaultQuPathUserPath+"/scripts")
+	prefs.put("scriptsPath", defaultQuPathUserPath+"/qupath-scripts")
 } else {
 	IJ.log("QuPath user path already exists")
-	prefs.put("scriptsPath", defaultQuPathUserPath+"/scripts")
+	prefs.put("scriptsPath", defaultQuPathUserPath+"/qupath-scripts")
 }
 
 IJ.log("QuPath user path: "+userPath)
@@ -62,7 +62,7 @@ if (!userPathFile.exists()) {
 }
 
 // Create QuPath scripts folder if needed
-File scriptsDir = new File(userPath,"scripts")
+File scriptsDir = new File(userPath,"qupath-scripts")
 if (!scriptsDir.exists()) {
 	def result = scriptsDir.mkdir()
 	if (!result) {
