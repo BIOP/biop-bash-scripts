@@ -61,9 +61,8 @@ function getuserdir(){
 
 # ----------------- COMPONENTS VERSION -----------
 qupath_version=0.3.2
-
-biop_extension_version=1.0.3
-cellpose_extension_version=0.3.7
+biop_extension_version=1.0.4
+cellpose_extension_version=0.4.1
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.3
 stardist_extension_version=0.3.1
@@ -180,7 +179,7 @@ if [[ -f "$qupath_path" ]]; then
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.3\""
+argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath_Common_Data_0.3\""
 argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.3\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 

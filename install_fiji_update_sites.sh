@@ -9,16 +9,14 @@ function Help()
    echo ------ Fiji Update Sites Installer Script -------------
    echo "This adds update sites to an existing Fiji install"
    echo "The following sites are automatically installed:"
-   echo "    - 3D Image Suite"   
-   echo "    - ABBA"
+   echo "    - 3D Image Suite"  
    echo "    - Bio-Formats"
    echo "    - CSBDeep"
-   echo "    - Fiji-EasyXT"
    echo "    - IBMP-CNRS"
    echo "    - IJPB-Plugins"
    echo "    - ImageScience"
-   echo "    - Operetta Importer"
-   echo "    - PTBIOP (obviously)"
+   echo "    - PTBIOP"
+   echo "    - ilastik"
    echo "    - Stardist"
    echo "    - TensorFlow"
    echo
@@ -135,9 +133,6 @@ echo "Fiji updated"
 echo "3D ImageJ Suite"
 "$fiji_path" --update add-update-site "3D ImageJ Suite" "https://sites.imagej.net/Tboudier/"
 
-echo "Enabling ABBA update site"
-"$fiji_path" --update add-update-site "ABBA" "https://biop.epfl.ch/Fiji-ABBA/"
-
 # echo "Enabling BigStitcher update site"
 # "$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
 
@@ -146,9 +141,6 @@ echo "Enabling Bio-Formats update site"
 
 echo "Enabling CSBDeep update site"
 "$fiji_path" --update add-update-site "CSBDeep" "https://sites.imagej.net/CSBDeep/"
-
-echo "Enabling Fiji-EasyXT update site"
-"$fiji_path" --update add-update-site "Fiji-EasyXT" "https://biop.epfl.ch/Fiji-EasyXT/"
 
 echo "Enabling IBMP-CNRS update site"
 "$fiji_path" --update add-update-site "IBMP-CNRS" "https://sites.imagej.net/Mutterer/"
@@ -159,11 +151,11 @@ echo "Enabling IJPB-plugins update site"
 echo "Enabling ImageScience update site"
 "$fiji_path" --update add-update-site "ImageScience" "https://sites.imagej.net/ImageScience/"
 
-echo "Enabling Operetta Importer update site"
-"$fiji_path" --update add-update-site "Operetta Importer" "https://biop.epfl.ch/update-sites/operetta/"
-
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
+
+echo "Enabling ilastik update site"
+"$fiji_path" --update add-update-site "ilastik" "https://sites.imagej.net/Ilastik/"
 
 echo "Enabling StarDist update site"
 "$fiji_path" --update add-update-site "StarDist" "https://sites.imagej.net/StarDist/"

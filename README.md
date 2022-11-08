@@ -125,7 +125,7 @@ This script simplifies the installation of [ABBA](https://biop.github.io/ijp-ima
 > * install QuPath
 > * install vc_redist_64.exe (necessary for elastix)
 > * install elastix and transformix
-> * enable the ABBA update site on Fiji
+> * enable the PTBIOP update site on Fiji
 > * set the elastix path on Fiji
 > * install the qupath ABBA extension in QuPath
 > 
