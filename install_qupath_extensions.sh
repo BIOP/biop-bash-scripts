@@ -224,7 +224,7 @@ echo "$all_args"
 
 echo -------- INSTALLATION OF OMERO DEPENDENCIES ---------
 
-biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/download/v5.6.4/OMERO.java-5.6.4-ice36-b232.zip"
+biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/download/v5.6.5/OMERO.java-5.6.5-ice36-b233.zip"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_dependencies_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
