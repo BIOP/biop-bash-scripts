@@ -14,6 +14,7 @@ function Help()
    echo "  - https://github.com/BIOP/qupath-extension-warpy"
    echo "  - https://github.com/BIOP/qupath-extension-abba"
    echo "  - https://github.com/qupath/qupath-extension-stardist"
+   echo "  - https://github.com/BIOP/qupath-extension-biop-omero"
    echo
    echo "You should specify the folder where qupath is installed"
    echo "argument of this script. For instance: "
@@ -61,10 +62,11 @@ function getuserdir(){
 # ----------------- COMPONENTS VERSION -----------
 qupath_version=0.3.2
 biop_extension_version=1.0.4
-cellpose_extension_version=0.4.1
+cellpose_extension_version=0.5.1
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.3
 stardist_extension_version=0.3.1
+biop_omero_extension_version=0.1.7
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
@@ -75,6 +77,8 @@ warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/dow
 abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
 
 stardist_extension_url="https://github.com/qupath/qupath-extension-stardist/releases/download/v${stardist_extension_version}/qupath-extension-stardist-${stardist_extension_version}.jar"
+
+biop_omero_extension_url="https://github.com/BIOP/qupath-extension-biop-omero/releases/download/v${biop_omero_extension_version}/qupath-extension-biop-omero-${biop_omero_extension_version}.jar"
 
 # ----------------- MAIN --------------------------
 
@@ -99,6 +103,7 @@ echo "- CellPose Extension: $cellpose_extension_version"
 echo "- Warpy Extension: $warpy_extension_version"
 echo "- ABBA Extension: $abba_extension_version"
 echo "- Stardist Extension: $stardist_extension_version"
+echo "- BIOP OMERO Extension: $biop_omero_extension_version"
 
 # ------- INSTALLATION PATH VALIDATION
 
@@ -209,5 +214,30 @@ argQuPathExtensionURL="quPathExtensionURL=\"$stardist_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+
+echo "--- Installing Stardist extension"
+
+argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_extension_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+echo "$all_args"
+"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+
+echo -------- INSTALLATION OF OMERO DEPENDENCIES ---------
+
+biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/download/v5.6.5/OMERO.java-5.6.5-ice36-b233.zip"
+
+argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_dependencies_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+echo "$all_args"
+"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+
+echo -------- INSTALLATION OF QUPATH BIOP SHARED SCRIPTS ---------
+
+biop_qupath_scripts_url="https://github.com/BIOP/qupath-scripts/archive/refs/heads/main.zip"
+
+argQuPathScriptsURL="quPathScriptsURL=\"$biop_qupath_scripts_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathScriptsURL,$argQuitAfterInstall"
+echo "$all_args"
+"$fiji_path" --ij2 --run InstallQuPathScripts.groovy "$all_args"
 
 echo ------ INSTALLATION DONE ------
