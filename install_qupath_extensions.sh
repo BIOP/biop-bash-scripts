@@ -64,7 +64,7 @@ qupath_version=0.3.2
 biop_extension_version=1.0.4
 cellpose_extension_version=0.5.1
 warpy_extension_version=0.2.0
-abba_extension_version=0.1.3
+abba_extension_version=0.1.4
 stardist_extension_version=0.3.1
 biop_omero_extension_version=0.1.7
 
