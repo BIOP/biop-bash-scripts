@@ -66,7 +66,7 @@ cellpose_extension_version=0.5.1
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.4
 stardist_extension_version=0.3.1
-biop_omero_extension_version=0.1.7
+biop_omero_extension_version=0.2.0
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
