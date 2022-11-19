@@ -70,7 +70,7 @@ biop_omero_extension_version=0.2.0
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
-cellpose_extension_url="https://github.com/BIOP/qupath-extension-cellpose/releases/download/v${cellpose_extension_version}/qupath-extension-cellpose-${cellpose_extension_version}.jar"
+cellpose_extension_url="https://github.com/BIOP/qupath-extension-cellpose/releases/download/v${cellpose_extension_version}/qupath-extension-cellpose-${cellpose_extension_version}.zip"
 
 warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
 
@@ -78,7 +78,7 @@ abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/downl
 
 stardist_extension_url="https://github.com/qupath/qupath-extension-stardist/releases/download/v${stardist_extension_version}/qupath-extension-stardist-${stardist_extension_version}.jar"
 
-biop_omero_extension_url="https://github.com/BIOP/qupath-extension-biop-omero/releases/download/v${biop_omero_extension_version}/qupath-extension-biop-omero-${biop_omero_extension_version}.jar"
+biop_omero_extension_url="https://github.com/BIOP/qupath-extension-biop-omero/releases/download/v${biop_omero_extension_version}/qupath-extension-biop-omero-${biop_omero_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
 
