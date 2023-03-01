@@ -133,6 +133,11 @@ echo "Fiji updated"
 
 sleep 20
 
+echo "Enabling PTBIOP update site"
+"$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
+
+sleep 20
+
 echo "3D ImageJ Suite"
 "$fiji_path" --update add-update-site "3D ImageJ Suite" "https://sites.imagej.net/Tboudier/"
 
@@ -173,11 +178,6 @@ sleep 20
 
 echo "Enabling OMERO 5.5-5.6 update site"
 "$fiji_path" --update add-update-site "OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
-
-sleep 20
-
-echo "Enabling PTBIOP update site"
-"$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
 
 sleep 20
 
