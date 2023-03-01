@@ -7,7 +7,7 @@ function Help()
 {
    # Display Help
    echo ------QuPath extensions installer Script -------------
-   echo "This batch file downloads and install some biop selected QuPath (v0.3) extensions."
+   echo "This batch file downloads and install some biop selected QuPath (v0.4) extensions."
    echo 
    echo "  - https://github.com/BIOP/qupath-extension-biop"
    echo "  - https://github.com/BIOP/qupath-extension-cellpose"
@@ -60,13 +60,13 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.3.2
-biop_extension_version=1.0.4
-cellpose_extension_version=0.5.1
+qupath_version=0.4.3
+biop_extension_version=2.0.0
+cellpose_extension_version=0.6.1
 warpy_extension_version=0.2.0
 abba_extension_version=0.1.4
-stardist_extension_version=0.3.1
-biop_omero_extension_version=0.2.0
+stardist_extension_version=0.4.0
+biop_omero_extension_version=0.3.2
 
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
@@ -224,7 +224,7 @@ echo "$all_args"
 
 echo -------- INSTALLATION OF OMERO DEPENDENCIES ---------
 
-biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/download/v5.6.5/OMERO.java-5.6.5-ice36-b233.zip"
+biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/download/v5.6.6/OMERO.java-5.6.6-ice36-b233.zip"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_dependencies_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
