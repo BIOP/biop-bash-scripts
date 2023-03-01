@@ -56,7 +56,7 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.3.2
+qupath_version=0.4.3
 warpy_extension_version=0.2.0
 elastix_version=5.0.1
 
@@ -289,8 +289,8 @@ fi
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.3\""
-argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.3\""
+argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.4\""
+argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.4\""
 argQuPathExtensionURL="quPathExtensionURL=\"$qupath_warpy_extension_url\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
