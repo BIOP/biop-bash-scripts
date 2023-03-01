@@ -131,74 +131,76 @@ echo "Updating Fiji"
 "$fiji_path" --update update
 echo "Fiji updated"
 
+sleep 20
+
 echo "3D ImageJ Suite"
 "$fiji_path" --update add-update-site "3D ImageJ Suite" "https://sites.imagej.net/Tboudier/"
 
 # We need pauses between each update
 # https://forum.image.sc/t/repeated-imagej-updater-calls-cause-403-errors/76613 
 
-sleep 10
+sleep 20
 
 # echo "Enabling BigStitcher update site"
 # "$fiji_path" --update add-update-site "BigStitcher" "https://sites.imagej.net/BigStitcher/"
 
-sleep 10
+sleep 20
 
 echo "Enabling Bio-Formats update site"
 "$fiji_path" --update add-update-site "Bio-Formats" "https://sites.imagej.net/Bio-Formats/"
 
-sleep 10
+sleep 20
 
 echo "Enabling CSBDeep update site"
 "$fiji_path" --update add-update-site "CSBDeep" "https://sites.imagej.net/CSBDeep/"
 
-sleep 10
+sleep 20
 
 echo "Enabling IBMP-CNRS update site"
 "$fiji_path" --update add-update-site "IBMP-CNRS" "https://sites.imagej.net/Mutterer/"
 
-sleep 10
+sleep 20
 
 echo "Enabling IJPB-plugins update site"
 "$fiji_path" --update add-update-site "IJPB-plugins" "https://sites.imagej.net/IJPB-plugins/"
 
-sleep 10
+sleep 20
 
 echo "Enabling ImageScience update site"
 "$fiji_path" --update add-update-site "ImageScience" "https://sites.imagej.net/ImageScience/"
 
-sleep 10
+sleep 20
 
 echo "Enabling OMERO 5.5-5.6 update site"
 "$fiji_path" --update add-update-site "OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
 
-sleep 10
+sleep 20
 
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
 
-sleep 10
+sleep 20
 
 echo "Enabling ilastik update site"
 "$fiji_path" --update add-update-site "ilastik" "https://sites.imagej.net/Ilastik/"
 
-sleep 10
+sleep 20
 
 echo "Enabling StarDist update site"
 "$fiji_path" --update add-update-site "StarDist" "https://sites.imagej.net/StarDist/"
 
-sleep 10
+sleep 20
 
 echo "Enabling TensorFlow update site"
 "$fiji_path" --update add-update-site "TensorFlow" "https://sites.imagej.net/TensorFlow/"
 
-sleep 10
+sleep 20
 
 echo "Updating Fiji again" 
 "$fiji_path" --update update
 echo "Fiji should now be up-to-date"
 
-sleep 10
+sleep 20
 
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update
