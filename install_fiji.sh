@@ -78,6 +78,15 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
 	fiji_executable_file="ImageJ-linux64"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
+	echo "[Desktop Entry]
+Type=Application
+Name=Fiji
+Comment=QuPath
+Icon=$path_install/Fiji.app/images/icon-flat.png
+Exec="$path_install/Fiji.app/$fiji_executable_file"
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/Fiji.desktop
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"

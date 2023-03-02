@@ -80,11 +80,18 @@ echo ------ Setting up QuPath ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
-	# pause "Press [Enter] to end the script"
-	# exit 1 # We cannot proceed
 	qupath_executable_file="QuPath"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
 	qupath_path="$path_install/QuPath-${qupath_version}/bin/$qupath_executable_file"
+	echo "[Desktop Entry]
+Type=Application
+Name=QuPath
+Comment=QuPath
+Icon=$path_install/QuPath-${qupath_version}/lib/QuPath.png
+Exec=$qupath_path.sh
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/QuPath.desktop
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
 	else
