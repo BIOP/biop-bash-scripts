@@ -1,5 +1,7 @@
 #!/bin/bash
-scriptpath=$(realpath dirname $0)
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
+
 ################################################################################
 # Help                                                                         #
 ################################################################################
@@ -32,28 +34,6 @@ while getopts ":h" option; do
          exit;;
    esac
 done
-
-
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
 
 # ----------------- COMPONENTS VERSION -----------
 qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
@@ -110,9 +90,9 @@ mkdir "$temp_dl_dir"
 echo ------ Setting up ImageJ/Fiji ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	fiji_executable_file="ImageJ-linux64"
+	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"

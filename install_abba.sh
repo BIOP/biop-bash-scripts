@@ -1,5 +1,6 @@
 #!/bin/bash
-scriptpath=$(realpath dirname $0)
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -33,32 +34,7 @@ while getopts ":h" option; do
    esac
 done
 
-
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 # ----------------- COMPONENTS VERSION -----------
-# qupath_version=0.4.3
-# abba_extension_version=0.1.4
-# elastix_version=5.0.1
 source "$scriptpath/version_software_script.sh"
 qupath_abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
 
@@ -112,7 +88,7 @@ mkdir "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
-$scriptpath/install_fiji.sh "$path_install"
+."$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
@@ -146,8 +122,6 @@ echo ------ Setting up Elastix ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
-	# pause "Press [Enter] to end the script"
-	# exit 1 # We cannot proceed
 	elastix_os_subpath="elastix-$elastix_version-linux"
 	elastix_executable_file="bin/elastix"
 	transformix_executable_file="bin/transformix"

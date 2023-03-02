@@ -1,4 +1,6 @@
 #!/bin/bash
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -28,27 +30,6 @@ while getopts ":h" option; do
    esac
 done
 
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 echo ------ ImageJ/Fiji Installer Script -------------
 echo "This batch file downloads and install Fiji on your computer"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -67,7 +48,6 @@ fi
 # ------- INSTALLATION PATH VALIDATION
 
 echo ------- Installation path validation
-
 if [ $# -eq 0 ] 
 then
 	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n

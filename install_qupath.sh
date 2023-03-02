@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # ----------------- COMPONENTS VERSION -----------
-scriptpath=$(realpath dirname $0)
+scriptpath=$(realpath $(dirname $0))
 source "$scriptpath/version_software_script.sh"
-# qupath_version=0.4.3
+source "$scriptpath/global_function.sh"
+
 ################################################################################
 # Help                                                                         #
 ################################################################################
@@ -33,27 +34,6 @@ while getopts ":h" option; do
          exit;;
    esac
 done
-
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
 
 echo ------ QuPath Installer Script -------------
 echo "This batch file downloads and install QuPath on your computer"

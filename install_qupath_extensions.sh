@@ -1,5 +1,5 @@
 #!/bin/bash
-scriptpath=$(realpath dirname $0)
+scriptpath=$(realpath $(dirname $0))
 source "$scriptpath/version_software_script.sh"
 
 ################################################################################

@@ -1,4 +1,6 @@
 #!/bin/bash
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -33,26 +35,6 @@ while getopts ":h" option; do
    esac
 done
 
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
 
 echo ------ BIOP Full Installer Script -------------
 echo "This batch file downloads and install Fiji, QuPath and associated Biop selected components on your computer"
@@ -89,7 +71,6 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-scriptpath=$(realpath dirname $0)
-$scriptPath/full_install_biop_fiji.sh "$path_install"
-$scriptPath/full_install_biop_qupath.sh "$path_install"
-$scriptPath/full_install_abba.sh "$path_install"
+source "$scriptpath/full_install_biop_fiji.sh" "$path_install"
+source "$scriptpath/full_install_biop_qupath.sh" "$path_install"
+source "$scriptpath/full_install_abba.sh" "$path_install"
