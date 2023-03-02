@@ -1,5 +1,5 @@
 #!/bin/bash
-scriptpath= dirname $0
+scriptpath=$(realpath dirname $0)
 
 ################################################################################
 # Help                                                                         #

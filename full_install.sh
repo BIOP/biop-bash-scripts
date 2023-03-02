@@ -89,7 +89,7 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-scriptPath= dirname $0
+scriptpath=$(realpath dirname $0)
 $scriptPath/full_install_biop_fiji.sh "$path_install"
 $scriptPath/full_install_biop_qupath.sh "$path_install"
 $scriptPath/full_install_abba.sh "$path_install"
