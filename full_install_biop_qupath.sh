@@ -70,5 +70,5 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-."$scriptpath/install_qupath.sh" "$path_install"
-."$scriptpath/install_qupath_extensions.sh" "$path_install"
+. "$scriptpath/install_qupath.sh" "$path_install"
+. "$scriptpath/install_qupath_extensions.sh" "$path_install"
