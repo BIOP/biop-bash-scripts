@@ -72,7 +72,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
+	The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
@@ -87,5 +88,6 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-./install_abba.sh "$path_install"
-./install_abba_atlases.sh "$path_install"
+scriptname=dirname $0
+$scriptname/install_abba.sh "$path_install"
+$scriptname/install_abba_atlases.sh "$path_install"

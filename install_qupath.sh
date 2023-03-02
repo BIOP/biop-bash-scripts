@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
-
+scriptpath= dirname $0
+source "$scriptpath/version_software_script.sh"
+# qupath_version=0.4.3
 ################################################################################
 # Help                                                                         #
 ################################################################################
@@ -72,7 +73,6 @@ fi
 # ------- INSTALLATION PATH VALIDATION
 
 echo ------- Installation path validation
-
 if [ $# -eq 0 ] 
 then
 	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
@@ -99,9 +99,29 @@ echo ------ Setting up QuPath ------
 
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	# pause "Press [Enter] to end the script"
+	# exit 1 # We cannot proceed
+	qupath_executable_file="QuPath"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
+	qupath_path="$path_install/QuPath-${qupath_version}/bin/$qupath_executable_file"
+	if [[ -f "$qupath_path" ]]; then
+		echo "QuPath detected, bypassing installation"
+	else
+		echo "QuPath not present, downloading it from $qupath_url"
+		qupath_zip_path="$temp_dl_dir/QuPath-${qupath_version}-Linux.tar.xz"
+		curl "$qupath_url" -L -# -o "$qupath_zip_path"
+		echo "Unzipping QuPath"
+		tar -xvf "$qupath_zip_path" "$path_install/"
+		chmod u+x "$path_install/QuPath/bin/QuPath*"
+		if [[ -f "$qupath_path" ]]; then
+			echo "QuPath successfully installed"
+		else
+			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed
+		fi
+	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
 	qupath_path="/Applications/QuPath.app/$qupath_executable_file"

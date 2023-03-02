@@ -1,4 +1,5 @@
 #!/bin/bash
+scriptpath= dirname $0
 
 ################################################################################
 # Help                                                                         #
@@ -55,10 +56,10 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
-abba_extension_version=0.1.4
-elastix_version=5.0.1
-
+# qupath_version=0.4.3
+# abba_extension_version=0.1.4
+# elastix_version=5.0.1
+source "$scriptpath/version_software_script.sh"
 qupath_abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
@@ -89,7 +90,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
+	The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
@@ -110,51 +112,8 @@ mkdir "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
-	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	fiji_executable_file="ImageJ-win64.exe"
-	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-win64.zip"
-fi
-
+$scriptpath/install_fiji.sh "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
-
-echo "Looking for Fiji executable: $fiji_path"
-if [[ -f "$fiji_path" ]]; then
-    echo "Fiji detected, bypassing installation"
-else
-	echo "Fiji not present, downloading it"
-	fiji_zip_path="$temp_dl_dir/fiji.zip"
-	curl "$fiji_url" -# -o "$fiji_zip_path"
-	echo "Unzipping Fiji in $path_install"
-	unzip "$fiji_zip_path" -d "$path_install/"
-	if [[ "$OSTYPE" == "darwin"* ]]; then
-    		echo "Your OS: Mac OSX, make the folder not read only"
-		chflags -R nouchg "$path_install/Fiji.app"
-		xattr -rd com.apple.quarantine "$path_install/Fiji.app"
-    		chmod -R a+w "$path_install/Fiji.app"
-	fi
-fi
-
-if [[ -f "$fiji_path" ]]; then
-    echo "Fiji successfully installed."
-else
-	echo "Fiji installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
-
-# Updating several times because there may be some issues with removing some files after a single update is performed
-echo "Updating Fiji"
-"$fiji_path" --update update
-echo "Fiji updated"
-
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
 echo "PTBIOP update site enabled"
@@ -169,8 +128,8 @@ echo "Fiji is now up-to-date"
 
 echo "Setting up default ABBA atlases folder"
 
+# ------ SETTING UP abba_atlases
 mkdir -p "$path_install/abba_atlases"
-
 mkdir -p "$path_install/Fiji.app/plugins/BIOP"
 
 echo -n "$path_install/abba_atlases">"$path_install/Fiji.app/plugins/BIOP/ABBA_Atlas_folder.txt"
@@ -186,9 +145,13 @@ fi
 echo ------ Setting up Elastix ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	# pause "Press [Enter] to end the script"
+	# exit 1 # We cannot proceed
+	elastix_os_subpath="elastix-$elastix_version-linux"
+	elastix_executable_file="bin/elastix"
+	transformix_executable_file="bin/transformix"
+	elastix_url="https://github.com/SuperElastix/elastix/releases/download/${elastix_version}/elastix-${elastix_version}-linux.zip"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	elastix_os_subpath="elastix-$elastix_version-mac"
 	elastix_executable_file="bin/elastix"
@@ -207,23 +170,23 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 	errorlevel=$?
 
 	if [[ "$errorlevel" == "0" ]]; then
-	    echo "VS Redistributable is installed."
+		echo "VS Redistributable is installed."
 	else 
-	    echo "VS Redistributable is not installed - downloading it"
-	    vc_redist_url="https://aka.ms/vs/16/release/vc_redist.x64.exe"
-	    vc_redist_path="$temp_dl_dir/vc_redist_install.exe"
-	    curl "$vc_redist_url" -L -# -o "$vc_redist_path"
-	    echo "Launching VC redist install - Do not restart your computer at the end of the install"
-	    "$vc_redist_path"
-	    # Does the registry key exist NOW ?
-	    MSYS_NO_PATHCONV=1 reg query "HKLM\\SOFTWARE\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64" /v Major >dummy
+		echo "VS Redistributable is not installed - downloading it"
+		vc_redist_url="https://aka.ms/vs/16/release/vc_redist.x64.exe"
+		vc_redist_path="$temp_dl_dir/vc_redist_install.exe"
+		curl "$vc_redist_url" -L -# -o "$vc_redist_path"
+		echo "Launching VC redist install - Do not restart your computer at the end of the install"
+		"$vc_redist_path"
+		# Does the registry key exist NOW ?
+		MSYS_NO_PATHCONV=1 reg query "HKLM\\SOFTWARE\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64" /v Major >dummy
 		errorlevel=$?
 		if [[ "$errorlevel" == "0" ]]; then
-		  echo "VS Redistributable is now installed."
+			echo "VS Redistributable is now installed."
 		else 
-		  echo "Something went wrong during VS redistributable installation!"
-		  pause "Press [Enter] to end the script"
-		  exit 1 # We cannot proceed	  
+			echo "Something went wrong during VS redistributable installation!"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed	  
 		fi
 	fi
 fi
@@ -257,61 +220,12 @@ all_args="$argElastixPath,$argTransformixPath"
 
 # ------ SETTING UP QUPATH ------
 echo ------ Setting up QuPath ------
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	qupath_executable_file="Contents/MacOS/QuPath"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
-	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
-	echo "$qupath_path"
-	if [[ -f "$qupath_path" ]]; then
-		echo "QuPath detected, bypassing installation"
-	else
-		echo "QuPath not present, downloading it from $qupath_url"
-		qupath_zip_path="$temp_dl_dir/qupath.pkg"
-		curl "$qupath_url" -L -# -o "$qupath_zip_path"
-		echo "Installing QuPath, you will need to enter your admin password for the install (or install QuPath before running the script)"
-		sudo installer -pkg "$qupath_zip_path" -target /
-		if [[ -f "$qupath_path" ]]; then
-			echo "QuPath successfully installed"
-		else
-			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less privilege"
-			pause "Press [Enter] to end the script"
-			exit 1 # We cannot proceed
-		fi
-	fi
-elif [[ "$OSTYPE" == "msys" ]]; then
-	qupath_executable_file="QuPath-${qupath_version}.exe"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Windows.zip"
-	qupath_path="$path_install/QuPath-${qupath_version}/$qupath_executable_file"
-	if [[ -f "$qupath_path" ]]; then
-		echo "QuPath detected, bypassing installation"
-	else
-		echo "QuPath not present, downloading it from $qupath_url"
-		qupath_zip_path="$temp_dl_dir/qupath.zip"
-		curl "$qupath_url" -L -# -o "$qupath_zip_path"
-		echo "Unzipping QuPath"
-		unzip "$qupath_zip_path" -d "$path_install"
-		if [[ -f "$qupath_path" ]]; then
-			echo "QuPath successfully installed"
-		else
-			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
-			pause "Press [Enter] to end the script"
-			exit 1 # We cannot proceed
-		fi
-	fi	
-fi
+$scriptpath/install_qupath.sh "$path_install"
 
 echo ------ Setting up QuPath extension ------
-
+#TODO refine here verify if QPath is in directory define a QuPath dir where the version is not precised
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.3\""
-argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.3\""
-argQuPathExtensionURL="quPathExtensionURL=\"$qupath_abba_extension_url\""
-argQuitAfterInstall="quitAfterInstall=\"true\""
+
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
 
@@ -320,7 +234,7 @@ rm -r "$temp_dl_dir"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	echo "Your OS: Mac OSX, make the qupath extension folder not read only"
-	chmod -R a+w "$path_install/QuPath Common Data_0.3"
+	chmod -R a+w "$path_install/QuPath Common Data_0.4"
 fi
 
 echo ------ INSTALLATION DONE ------

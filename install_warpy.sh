@@ -1,5 +1,5 @@
 #!/bin/bash
-
+scriptpath= dirname $0
 ################################################################################
 # Help                                                                         #
 ################################################################################
@@ -56,10 +56,6 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
-warpy_extension_version=0.2.0
-elastix_version=5.0.1
-
 qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
 
 # ----------------- MAIN --------------------------

@@ -1,4 +1,5 @@
 #!/bin/bash
+scriptpath= dirname $0
 
 ################################################################################
 # Help                                                                         #
@@ -72,7 +73,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
+	The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
@@ -87,5 +89,5 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-./install_fiji.sh "$path_install"
-./install_fiji_update_sites.sh "$path_install"
+$scriptpath/install_fiji.sh "$path_install"
+$scriptpath/install_fiji_update_sites.sh "$path_install"

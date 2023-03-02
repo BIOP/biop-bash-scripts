@@ -73,7 +73,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, , Linux : /home/user/abba) \n
+	The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
@@ -88,7 +89,7 @@ fi
 echo "All components will be installed in:"
 echo "$path_install"
 
-./full_install_biop_fiji.sh "$path_install"
-./full_install_biop_qupath.sh "$path_install"
-./full_install_abba.sh "$path_install"
-
+scriptPath= dirname $0
+$scriptPath/full_install_biop_fiji.sh "$path_install"
+$scriptPath/full_install_biop_qupath.sh "$path_install"
+$scriptPath/full_install_abba.sh "$path_install"

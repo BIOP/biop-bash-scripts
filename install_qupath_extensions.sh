@@ -1,4 +1,6 @@
 #!/bin/bash
+scriptpath= dirname $0
+source "$scriptpath/version_software_script.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -60,14 +62,6 @@ function getuserdir(){
 }
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
-biop_extension_version=2.0.0
-cellpose_extension_version=0.6.1
-warpy_extension_version=0.2.0
-abba_extension_version=0.1.4
-stardist_extension_version=0.4.0
-biop_omero_extension_version=0.3.2
-
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
 cellpose_extension_url="https://github.com/BIOP/qupath-extension-cellpose/releases/download/v${cellpose_extension_version}/qupath-extension-cellpose-${cellpose_extension_version}.zip"
@@ -111,7 +105,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
+	The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then
@@ -131,9 +126,9 @@ echo "$path_install"
 echo "------ Is ImageJ/Fiji installed ? ------"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	fiji_executable_file="ImageJ-linux64"
+	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
@@ -141,7 +136,6 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 	fiji_executable_file="ImageJ-win64.exe"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-win64.zip"
 fi
-
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 
 if [[ -f "$fiji_path" ]]; then
@@ -157,9 +151,9 @@ fi
 echo ------ Setting up QuPath ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	qupath_executable_file="QuPath"
+	qupath_path="$path_install/QuPath-${qupath_version}/bin/$qupath_executable_file"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
 	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
@@ -179,18 +173,13 @@ if [[ -f "$qupath_path" ]]; then
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath_Common_Data_0.4\""
-argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.4\""
-argQuitAfterInstall="quitAfterInstall=\"true\""
 
 echo "--- Installing BIOP extension"
-
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing Cellpose extension"
-
 argQuPathExtensionURL="quPathExtensionURL=\"$cellpose_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"

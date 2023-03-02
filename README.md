@@ -2,7 +2,7 @@
 
 This repository contains bash scripts which should ideally simplify your life when working with [QuPath]() and [Fiji](https://imagej.net/software/fiji/).
 
-> Windows and  Mac-OSX supported, contributions for Linux welcomed!
+> Windows and  Mac-OSX supported, contributions for Linux welcomed, added in beta mode!
 
 These scripts should automatically download (internet connection required!), install, update and configure several tools, in a platform independent manner.
 
@@ -32,6 +32,7 @@ Each script can take a path as an argument for the installation. Otherwise a pat
 
 * Windows: `C:/`
 * Mac-OSX: `/Applications/`
+* Linux: `/user/.Abba/`
 
 If you install on a path with space characters, use double quotes, for instance:
 
