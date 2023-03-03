@@ -63,7 +63,7 @@ mkdir "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
-."$scriptpath/install_fiji.sh" "$path_install"
+. "$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
