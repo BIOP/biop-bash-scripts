@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -54,8 +55,8 @@ echo ------- Installation path validation
 
 if [ $# -eq 0 ] 
 then
-    echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
-	The directory must exist first."
+    echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba)"
+	echo "The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then

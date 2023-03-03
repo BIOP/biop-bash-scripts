@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -22,6 +23,11 @@ function Help()
    echo "Mac:"
    echo "./full_install_biop_fiji.sh /Applications/"
    echo ""
+   echo
+   echo "Linux:"
+   echo "./full_install_biop_fiji.sh /home/user/abba"
+   echo ""
+   echo
    echo "If no path is specified, you will be asked for one."
    echo
 }
@@ -50,11 +56,12 @@ fi
 
 # ------- INSTALLATION PATH VALIDATION
 echo ------- Installation path validation
-echo "test debug full_install_biop" $#
+# echo "test debug full_install_biop" $#
+
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
-	The directory must exist first."
+	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba)"
+	echo "The directory must exist first."
 	getuserdir path_install
 else 	
 	if [ -d "$1" ] ; then

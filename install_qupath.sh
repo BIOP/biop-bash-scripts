@@ -1,8 +1,6 @@
 #!/bin/bash
-
-# ----------------- COMPONENTS VERSION -----------
 scriptpath=$(realpath $(dirname $0))
-source "$scriptpath/version_software_script.sh"
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -151,7 +149,6 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 		fi
 	fi	
 fi
-
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"

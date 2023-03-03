@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -33,10 +34,6 @@ while getopts ":h" option; do
          exit;;
    esac
 done
-
-# ----------------- COMPONENTS VERSION -----------
-source "$scriptpath/version_software_script.sh"
-qupath_abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
 
@@ -88,19 +85,19 @@ mkdir "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
-."$scriptpath/install_fiji.sh" "$path_install"
+"$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
+
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
 echo "PTBIOP update site enabled"
 
+echo "Waiting 20 seconds to avoid 403 errors when updating Fiji, please wait..."
+sleep 20
+
 echo "Updating Fiji"
 "$fiji_path" --update update
 echo "Fiji updated"
-
-echo "Updating Fiji one last time" 
-"$fiji_path" --update update
-echo "Fiji is now up-to-date"
 
 echo "Setting up default ABBA atlases folder"
 
@@ -194,12 +191,19 @@ all_args="$argElastixPath,$argTransformixPath"
 
 # ------ SETTING UP QUPATH ------
 echo ------ Setting up QuPath ------
-$scriptpath/install_qupath.sh "$path_install"
+"$scriptpath/install_qupath.sh" "$path_install"
 
-echo ------ Setting up QuPath extension ------
+echo ------ Setting up QuPath extensions ------
 #TODO refine here verify if QPath is in directory define a QuPath dir where the version is not precised
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
 
+echo "--- Installing Warpy extension"
+argQuPathExtensionURL="quPathExtensionURL=\"$warpy_extension_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+
+echo "--- Installing ABBA extension"
+argQuPathExtensionURL="quPathExtensionURL=\"$abba_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 "$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
 

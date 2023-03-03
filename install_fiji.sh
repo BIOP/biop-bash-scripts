@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -133,6 +134,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	xattr -rd com.apple.quarantine "$path_install/Fiji.app"
 	chmod -R a+w "$path_install/Fiji.app"
 fi
+
+echo "Waiting 20 seconds to avoid 403 errors when updating Fiji, please wait..."
+sleep 20
 
 echo "Updating Fiji one last time" 
 "$fiji_path" --update update

@@ -1,4 +1,7 @@
 #!/bin/bash
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -31,27 +34,6 @@ while getopts ":h" option; do
          exit;;
    esac
 done
-
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
 
 echo ------ ImageJ/Fiji BIOP Full Installer Script -------------
 echo "This batch file downloads and install all components on your computer"

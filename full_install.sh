@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh"
 source "$scriptpath/global_function.sh"
 
 ################################################################################
@@ -14,7 +15,7 @@ function Help()
    echo "    - full_install_biop_qupath.sh"
    echo "    - full_install_abba.sh"
    echo
-   echo "You need to specify the installation folder as  an "
+   echo "You need to specify the installation folder as an"
    echo "argument of this script. For instance: "
    echo ""
    echo "Windows:"
@@ -23,6 +24,10 @@ function Help()
    echo "Mac:"
    echo "./full_install.sh /Applications/"
    echo ""
+   echo 
+   echo "Linux:"
+   echo "./full_install.sh /home/user/abba"
+   echo
    echo "If no path is specified, you will be asked for one."
    echo
 }
@@ -34,7 +39,6 @@ while getopts ":h" option; do
          exit;;
    esac
 done
-
 
 echo ------ BIOP Full Installer Script -------------
 echo "This batch file downloads and install Fiji, QuPath and associated Biop selected components on your computer"
