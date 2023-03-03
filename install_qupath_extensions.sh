@@ -9,7 +9,7 @@ function Help()
 {
    # Display Help
    echo ------QuPath extensions installer Script -------------
-   echo "This batch file downloads and install some biop selected QuPath (v0.4) extensions."
+   echo "This batch file downloads and install some biop selected QuPath (v$qupath_version) extensions."
    echo 
    echo "  - https://github.com/BIOP/qupath-extension-biop"
    echo "  - https://github.com/BIOP/qupath-extension-cellpose"
@@ -80,7 +80,7 @@ fi
 # ------ Getting IMAGEJ/FIJI
 echo "------ Is ImageJ/Fiji installed ? ------"
 echo ------ Setting up ImageJ/Fiji ------
-."$scriptpath/install_fiji.sh" "$path_install"
+. "$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 
 if [[ -f "$fiji_path" ]]; then
@@ -98,13 +98,13 @@ echo ------ Setting up QuPath ------
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
 	qupath_executable_file="QuPath"
-	qupath_path="$path_install/QuPath-${qupath_version}/bin/$qupath_executable_file"
+	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
 	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
 elif [[ "$OSTYPE" == "msys" ]]; then
-	qupath_executable_file="QuPath-${qupath_version}.exe"
-	qupath_path="$path_install/QuPath-${qupath_version}/$qupath_executable_file"
+	qupath_executable_file="QuPath-$qupath_version.exe"
+	qupath_path="$path_install/QuPath-$qupath_version/$qupath_executable_file"
 fi
 
 if [[ -f "$qupath_path" ]]; then

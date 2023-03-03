@@ -14,7 +14,7 @@ function Help()
    echo "    - full_install_biop_qupath.sh"
    echo "    - full_install_abba.sh"
    echo
-   echo "You need to specify the installation folder as  an "
+   echo "You need to specify the installation folder as an "
    echo "argument of this script. For instance: "
    echo ""
    echo "Windows:"

@@ -43,7 +43,8 @@ function path_validation(){
 	then
 		echo ------- Installation path validation
 		system_check
-		echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
+		echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba)"
+		echo "The directory must exist first"
 		getuserdir path_install
 	else 	
 		if [ -d "$1" ] ; then

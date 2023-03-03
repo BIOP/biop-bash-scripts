@@ -2,7 +2,7 @@
 
 # ----------------- COMPONENTS VERSION -----------
 scriptpath=$(realpath $(dirname $0))
-source "$scriptpath/version_software_script.sh"
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
 ################################################################################
