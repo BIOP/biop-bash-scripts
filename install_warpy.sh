@@ -43,44 +43,20 @@ qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/relea
 echo ------ Warpy Installer Script -------------
 echo "This batch file downloads and install Warpy components on your computer"
 echo "See https://c4science.ch/w/warpy/"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else 
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
+if [ $# -eq 0 ] 
+then
+	path_validation
+else 	
+	path_validation $1
 fi
+
 echo "- Latest ImageJ/Fiji"
 echo -e " \t - Update Fiji"
 echo -e " \t - Enable Bigdataviewer-Playground Update Site"
 echo "- QuPath version: $qupath_version"
 echo "- Elastix version: $elastix_version"
 echo "- Warpy QuPath Extension: $warpy_extension_version"
-
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
-
-if [ $# -eq 0 ] 
-then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
-	getuserdir path_install
-else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path"
-		getuserdir path_install
-	fi	
-fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"

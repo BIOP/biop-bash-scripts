@@ -37,39 +37,13 @@ done
 
 
 echo ------ BIOP Full Installer Script -------------
-echo "This batch file downloads and install Fiji, QuPath and associated Biop selected components on your computer"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
-
-# ------- INSTALLATION PATH VALIDATION
-echo ------- Installation path validation
-
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/, , Linux : /home/user/abba) \n
-	The directory must exist first."
-	getuserdir path_install
+	path_validation
 else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path of Fiji"
-		getuserdir path_install
-	fi	
+	path_validation $1
 fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 source "$scriptpath/full_install_biop_fiji.sh" "$path_install"
 source "$scriptpath/full_install_biop_qupath.sh" "$path_install"

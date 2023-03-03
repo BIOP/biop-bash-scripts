@@ -40,27 +40,6 @@ while getopts ":h" option; do
 done
 
 
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 # ----------------- COMPONENTS VERSION -----------
 biop_extension_url="https://github.com/BIOP/qupath-extension-biop/releases/download/v${biop_extension_version}/qupath-extension-biop-${biop_extension_version}.jar"
 
@@ -78,17 +57,7 @@ biop_omero_extension_url="https://github.com/BIOP/qupath-extension-biop-omero/re
 
 echo ------ QuPath extensions Installer Script -------------
 echo "This batch file downloads and install QuPath extensions"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
+
 echo 
 echo "- QuPath version: $qupath_version"
 echo
@@ -99,53 +68,29 @@ echo "- ABBA Extension: $abba_extension_version"
 echo "- Stardist Extension: $stardist_extension_version"
 echo "- BIOP OMERO Extension: $biop_omero_extension_version"
 
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
-
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/, Linux : /home/user/abba) \n
-	The directory must exist first."
-	getuserdir path_install
+	path_validation
 else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path"
-		getuserdir path_install
-	fi	
+	path_validation $1
 fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 
 # ------ Getting IMAGEJ/FIJI
 echo "------ Is ImageJ/Fiji installed ? ------"
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux beta supported - please contribute to this installer to support it!"
-	fiji_executable_file="ImageJ-linux64"
-	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
-	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	fiji_executable_file="ImageJ-win64.exe"
-	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-win64.zip"
-fi
+echo ------ Setting up ImageJ/Fiji ------
+."$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
 
 if [[ -f "$fiji_path" ]]; then
     echo "Fiji correctly detected."
 else
 	echo "Fiji is not installed, please install it before running this script"
+	echo "Fiji is not in $fiji_path"
 	pause "Press [Enter] to end the script"
 	exit 1 # We cannot proceed
 fi
-
 
 # ------ SETTING UP QUPATH ------
 echo ------ Setting up QuPath ------
@@ -166,6 +111,7 @@ if [[ -f "$qupath_path" ]]; then
 		echo "QuPath correctly detected"
 	else
 		echo "QuPath is not installed, please install it before running this script"
+		echo "Please check this directory : $qupath_path"
 		pause "Press [Enter] to end the script"
 		exit 1 # We cannot proceed
 	fi	

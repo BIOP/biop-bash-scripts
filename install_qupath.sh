@@ -36,39 +36,13 @@ while getopts ":h" option; do
 done
 
 echo ------ QuPath Installer Script -------------
-echo "This batch file downloads and install QuPath on your computer"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
-
-
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
-	getuserdir path_install
+	path_validation
 else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path for QuPath"
-		getuserdir path_install
-	fi	
+	path_validation $1
 fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
@@ -82,12 +56,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
 	qupath_executable_file="QuPath"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
-	qupath_path="$path_install/QuPath-${qupath_version}/bin/$qupath_executable_file"
+	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
 	echo "[Desktop Entry]
 Type=Application
 Name=QuPath
 Comment=QuPath
-Icon=$path_install/QuPath-${qupath_version}/lib/QuPath.png
+Icon=$path_install/QuPath/lib/QuPath.png
 Exec=$qupath_path.sh
 Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
 StartupNotify=false  #notification de démarrage ou non (false ou true)
@@ -99,8 +73,10 @@ Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/a
 		qupath_zip_path="$temp_dl_dir/QuPath-${qupath_version}-Linux.tar.xz"
 		curl "$qupath_url" -L -# -o "$qupath_zip_path"
 		echo "Unzipping QuPath"
-		tar -xvf "$qupath_zip_path" "$path_install/"
-		chmod u+x "$path_install/QuPath/bin/QuPath*"
+		tar -f "$qupath_zip_path" -C "$path_install/" -xv
+		echo "We give execution right"
+		chmod u+x "$path_install/QuPath/bin/QuPath"
+		chmod u+x "$path_install/QuPath/bin/QuPath.sh"
 		if [[ -f "$qupath_path" ]]; then
 			echo "QuPath successfully installed"
 		else
