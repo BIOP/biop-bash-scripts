@@ -19,9 +19,6 @@ function getuserdir(){
     eval $__resultvar="'$myresult'"
 }
 
-#Check if the script is run independently.
-#TODO one day replace all dir install check by a function
-
 #Check the system :
 function system_check(){
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
