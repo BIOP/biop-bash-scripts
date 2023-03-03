@@ -150,7 +150,12 @@ else
 	elastix_zip_path="$temp_dl_dir/elastix.zip"
 	curl "$elastix_url" -L -# -o "$elastix_zip_path"
 	echo "Unzipping Elastix in $path_install"
-	unzip "$elastix_zip_path" -d "$path_install"
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		mkdir "$path_install/$elastix_os_subpath/"
+		unzip "$elastix_zip_path" -d "$path_install/$elastix_os_subpath/"
+	else
+		unzip "$elastix_zip_path" -d "$path_install"
+	fi
 fi
 
 if [[ -f "$elastix_path" ]]; then
