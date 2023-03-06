@@ -86,23 +86,23 @@ IJ.log("Download done")
 if (extension.equals("zip")) {
 	IJ.log("Unzipping")
 	try (ZipFile zipFile = new ZipFile(outputFile)) {
-	  Enumeration<? extends ZipEntry> entries = zipFile.entries();
-	  while (entries.hasMoreElements()) {
-	    ZipEntry entry = entries.nextElement();
-	    // IJ.log(entry.getName())
-	    // Remove the first subfolder: convenient for extracting a github repo
-	    String entryOneLessFolder = entry.getName().substring(entry.getName().indexOf('/'), entry.getName().size());
-	    File entryDestination = new File(scriptsDir,  entryOneLessFolder);
-	    if (entry.isDirectory()) {
-	        entryDestination.mkdirs();
-	    } else {
-	        entryDestination.getParentFile().mkdirs();
-	        try (InputStream in = zipFile.getInputStream(entry);
-	             OutputStream out = new FileOutputStream(entryDestination)) {
-	             IOUtils.copy(in, out);
-	        }
-	    }
-	  }
+		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		while (entries.hasMoreElements()) {
+			ZipEntry entry = entries.nextElement();
+	    	// IJ.log(entry.getName())
+	    	// Remove the first subfolder: convenient for extracting a github repo
+			String entryOneLessFolder = entry.getName().substring(entry.getName().indexOf('/'), entry.getName().size());
+			File entryDestination = new File(scriptsDir,  entryOneLessFolder);
+			if (entry.isDirectory()) {
+				entryDestination.mkdirs();
+			} else {
+				entryDestination.getParentFile().mkdirs();
+				try (InputStream in = zipFile.getInputStream(entry);
+					OutputStream out = new FileOutputStream(entryDestination)) {
+					IOUtils.copy(in, out);
+				}
+			}
+		}
 	}
 	IJ.log("Unzipping done")
 	outputFile.delete()
