@@ -152,7 +152,6 @@ else
 	echo "Unzipping Elastix in $path_install" #Any archive of Elastix are not in one directory
 	mkdir "$path_install/$elastix_os_subpath/"
 	unzip "$elastix_zip_path" -d "$path_install/$elastix_os_subpath/"
-	fi
 fi
 
 if [[ -f "$elastix_path" ]]; then
