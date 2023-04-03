@@ -57,15 +57,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	qupath_executable_file="QuPath"
 	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
 	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
-	echo "[Desktop Entry]
-Type=Application
-Name=QuPath
-Comment=QuPath
-Icon=$path_install/QuPath/lib/QuPath.png
-Exec=$qupath_path.sh
-Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
-StartupNotify=false  #notification de démarrage ou non (false ou true)
-Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/QuPath.desktop
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
 	else
@@ -77,6 +68,15 @@ Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/a
 		echo "We give execution right"
 		chmod u+x "$path_install/QuPath/bin/QuPath"
 		chmod u+x "$path_install/QuPath/bin/QuPath.sh"
+		echo "[Desktop Entry]
+Type=Application
+Name=QuPath
+Comment=QuPath
+Icon=$path_install/QuPath/lib/QuPath.png
+Exec=$qupath_path.sh
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/QuPath.desktop
 		if [[ -f "$qupath_path" ]]; then
 			echo "QuPath successfully installed"
 		else
