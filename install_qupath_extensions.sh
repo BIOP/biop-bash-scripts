@@ -1,5 +1,6 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 source "$scriptpath/version_software_script.sh"
 
 ################################################################################
