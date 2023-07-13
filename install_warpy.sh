@@ -1,4 +1,6 @@
 #!/bin/bash
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -33,33 +35,7 @@ while getopts ":h" option; do
    esac
 done
 
-
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
-warpy_extension_version=0.2.0
-elastix_version=5.0.1
-
 qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
 
 # ----------------- MAIN --------------------------
@@ -67,44 +43,20 @@ qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/relea
 echo ------ Warpy Installer Script -------------
 echo "This batch file downloads and install Warpy components on your computer"
 echo "See https://c4science.ch/w/warpy/"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else 
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
+if [ $# -eq 0 ] 
+then
+	path_validation
+else 	
+	path_validation $1
 fi
+
 echo "- Latest ImageJ/Fiji"
 echo -e " \t - Update Fiji"
 echo -e " \t - Enable Bigdataviewer-Playground Update Site"
 echo "- QuPath version: $qupath_version"
 echo "- Elastix version: $elastix_version"
 echo "- Warpy QuPath Extension: $warpy_extension_version"
-
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
-
-if [ $# -eq 0 ] 
-then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
-	getuserdir path_install
-else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path"
-		getuserdir path_install
-	fi	
-fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
@@ -114,9 +66,9 @@ mkdir "$temp_dl_dir"
 echo ------ Setting up ImageJ/Fiji ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	fiji_executable_file="ImageJ-linux64"
+	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"

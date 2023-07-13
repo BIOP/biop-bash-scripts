@@ -1,4 +1,6 @@
 #!/bin/bash
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -28,62 +30,14 @@ while getopts ":h" option; do
    esac
 done
 
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 echo ------ ImageJ/Fiji Installer Script -------------
-echo "This batch file downloads and install Fiji on your computer"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
-
-
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
-
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
-	getuserdir path_install
+	path_validation
 else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path for Fiji"
-		getuserdir path_install
-	fi	
+	path_validation $1
 fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
@@ -94,9 +48,18 @@ mkdir "$temp_dl_dir"
 echo ------ Setting up ImageJ/Fiji ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	fiji_executable_file="ImageJ-linux64"
+	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-linux64.zip"
+	echo "[Desktop Entry]
+Type=Application
+Name=Fiji
+Comment=QuPath
+Icon=$path_install/Fiji.app/images/icon-flat.png
+Exec="$path_install/Fiji.app/$fiji_executable_file"
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/Fiji.desktop
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fiji_executable_file="Contents/MacOS/ImageJ-macosx"
 	fiji_url="https://downloads.imagej.net/fiji/latest/fiji-macosx.zip"
@@ -117,10 +80,10 @@ else
 	echo "Unzipping Fiji in $path_install"
 	unzip "$fiji_zip_path" -d "$path_install/"
 	if [[ "$OSTYPE" == "darwin"* ]]; then
-    		echo "Your OS: Mac OSX, make the folder not read only"
+		echo "Your OS: Mac OSX, make the folder not read only"
 		chflags -R nouchg "$path_install/Fiji.app"
 		xattr -rd com.apple.quarantine "$path_install/Fiji.app"
-    		chmod -R a+w "$path_install/Fiji.app"
+		chmod -R a+w "$path_install/Fiji.app"
 	fi
 fi
 

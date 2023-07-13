@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # ----------------- COMPONENTS VERSION -----------
-qupath_version=0.4.3
+scriptpath=$(realpath $(dirname $0))
+source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
+source "$scriptpath/global_function.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -33,62 +35,14 @@ while getopts ":h" option; do
    esac
 done
 
-# ----------------- FUNCTIONS -------------------
-
-# Wait for user 
-function pause(){
-   read -p "$*"
-}
-
-# Returns
-function getuserdir(){
-    local  __resultvar=$1
-	local  myresult=
-		while true ; do
-			read -r -p "Path: " myresult
-			if [ -d "$myresult" ] ; then
-				break
-			fi
-			echo "$myresult is not a directory... try without slash at the end (unless it's the root drive like C:/)"
-		done
-    eval $__resultvar="'$myresult'"
-}
-
 echo ------ QuPath Installer Script -------------
-echo "This batch file downloads and install QuPath on your computer"
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Your OS: Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "Your OS: Mac OSX"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    echo "Your OS: Windows"
-else
-    echo "Unknown OS, the script will exit: $OSTYPE"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
-fi
-
-
-# ------- INSTALLATION PATH VALIDATION
-
-echo ------- Installation path validation
-
+#  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
-	echo "Please enter the installation path (windows: C:/, mac: /Applications/)"
-	getuserdir path_install
+	path_validation
 else 	
-	if [ -d "$1" ] ; then
-		path_install=$1
-	else
-		echo $1 is not a valid path
-		echo "Please enter the installation path for QuPath"
-		getuserdir path_install
-	fi	
+	path_validation $1
 fi
-
-echo "All components will be installed in:"
-echo "$path_install"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
@@ -99,9 +53,38 @@ echo ------ Setting up QuPath ------
 
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	echo "Linux beta supported - please contribute to this installer to support it!"
+	qupath_executable_file="QuPath"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
+	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
+	if [[ -f "$qupath_path" ]]; then
+		echo "QuPath detected, bypassing installation"
+	else
+		echo "QuPath not present, downloading it from $qupath_url"
+		qupath_zip_path="$temp_dl_dir/QuPath-${qupath_version}-Linux.tar.xz"
+		curl "$qupath_url" -L -# -o "$qupath_zip_path"
+		echo "Unzipping QuPath"
+		tar -f "$qupath_zip_path" -C "$path_install/" -xv
+		echo "We give execution right"
+		chmod u+x "$path_install/QuPath/bin/QuPath"
+		chmod u+x "$path_install/QuPath/bin/QuPath.sh"
+		echo "[Desktop Entry]
+Type=Application
+Name=QuPath
+Comment=QuPath
+Icon=$path_install/QuPath/lib/QuPath.png
+Exec=$qupath_path.sh
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/QuPath.desktop
+		if [[ -f "$qupath_path" ]]; then
+			echo "QuPath successfully installed"
+		else
+			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed
+		fi
+	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
 	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
