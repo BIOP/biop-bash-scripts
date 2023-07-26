@@ -10,7 +10,6 @@ function Help()
    # Display Help
    echo ------ Warpy Installer Script -------------
    echo "This batch file downloads and install Warpy components on your computer."
-   echo "See https://c4science.ch/w/warpy/"
    echo "Warpy needs Fiji, QuPath, elastix"
    echo "and associated plugins and extensions."
    echo

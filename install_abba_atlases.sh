@@ -55,50 +55,50 @@ echo "Creating ABBA atlases folder, if it does not exist"
 
 mkdir -p "$path_install/abba_atlases"
 
-echo "--- Downloading Mouse Adult Allen Brain Atlas CCFv3 (https://zenodo.org/record/4486659#.Yc2Rklko_iE)"
+echo "--- Downloading Mouse Adult Allen Brain Atlas CCFv3.1 (https://zenodo.org/record/7492551)"
 echo "- Ontology"
 ontology_path="$path_install/abba_atlases/1.json"
 if test -f "$ontology_path"; then
     echo "$ontology_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/4486659/files/1.json" -L -# -o "$ontology_path"
+	curl "https://zenodo.org/record/7492551/files/1.json" -L -# -o "$ontology_path"  
 fi
 echo "- Xml"
 xml_path="$path_install/abba_atlases/mouse_brain_ccfv3.xml"
 if test -f "$xml_path"; then
     echo "$xml_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/4486659/files/ccf2017-mod65000-border-centered-mm-bc.xml" -L -# -o "$xml_path"
+	curl "https://zenodo.org/record/7492551/files/ccf2017-mod65000-border-centered-mm-bc.xml" -L -# -o "$xml_path"
 fi
 echo "- Hdf5"
 h5_path="$path_install/abba_atlases/ccf2017-mod65000-border-centered-mm-bc.h5"
 if test -f "$h5_path"; then
     echo "$h5_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/4486659/files/ccf2017-mod65000-border-centered-mm-bc.h5" -L -# -o "$h5_path"
+	curl "https://zenodo.org/record/7492551/files/ccf2017-mod65000-border-centered-mm-bc.h5" -L -# -o "$h5_path"
 fi
 
-echo "--- Downloading Waxholm Space atlas of the Sprague Dawley Rat Brain V4 (https://zenodo.org/record/5644162#.Yc2Rq1ko_iE)"
+echo "--- Downloading Waxholm Space atlas of the Sprague Dawley Rat Brain V4.2 (https://zenodo.org/record/8092060)"
 echo "- Ontology"
 ontology_path="$path_install/abba_atlases/WHS_SD_rat_atlas_v4_labels.ilf"
 if test -f "$ontology_path"; then
     echo "$ontology_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/5644162/files/WHS_SD_rat_atlas_v4_labels.ilf" -L -# -o "$ontology_path"
+	curl "https://zenodo.org/record/8092060/files/WHS_SD_rat_atlas_v4_labels.ilf" -L -# -o "$ontology_path"
 fi
 echo "- Xml"
 xml_path="$path_install/abba_atlases/WHS_SD_rat_atlas_v4.xml"
 if test -f "$xml_path"; then
     echo "$xml_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/5644162/files/WHS_SD_rat_atlas_v4.xml" -L -# -o "$xml_path"
+	curl "https://zenodo.org/record/8092060/files/WHS_SD_rat_atlas_v4p2.xml" -L -# -o "$xml_path"
 fi
 echo "- Hdf5"
 h5_path="$path_install/abba_atlases/WHS_SD_rat_atlas_v4.h5"
 if test -f "$h5_path"; then
     echo "$h5_path already exists - skipping"
 else
-	curl "https://zenodo.org/record/5644162/files/WHS_SD_rat_atlas_v4.h5" -L -# -o "$h5_path"
+	curl "https://zenodo.org/record/8092060/files/WHS_SD_rat_atlas_v4p1.h5" -L -# -o "$h5_path"
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

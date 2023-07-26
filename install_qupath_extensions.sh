@@ -10,7 +10,7 @@ function Help()
 {
    # Display Help
    echo ------QuPath extensions installer Script -------------
-   echo "This batch file downloads and install some biop selected QuPath (v$qupath_version) extensions."
+   echo "This bash file downloads and install some biop selected QuPath (v$qupath_version) extensions."
    echo 
    echo "  - https://github.com/BIOP/qupath-extension-biop"
    echo "  - https://github.com/BIOP/qupath-extension-cellpose"
