@@ -93,36 +93,15 @@ echo "Fiji updated"
 #    echo "Error in Fiji update"
 # fi
 
-#Replace following lines by :
-# echo "Enabling all update sites"
-# $fiji_path --update add-update-sites \
-# 	"PTBIOP" "https://biop.epfl.ch/Fiji-Update"\
-# 	"OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"\
-# 	"StarDist" "https://sites.imagej.net/StarDist/"\
-
-# echo "Updating Fiji"
-# "$fiji_path" --update update
-# echo "Fiji updated"   
-sleep 20
-
 # We need pauses between each update
 # https://forum.image.sc/t/repeated-imagej-updater-calls-cause-403-errors/76613 
 
-echo "Enabling PTBIOP update site"
-"$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update"
+echo "Enabling update sites"
+"$fiji_path" --update add-update-sites \
+	"PTBIOP" "https://biop.epfl.ch/Fiji-Update" \
+	"StarDist" "https://sites.imagej.net/StarDist/" \
+	"OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
 
-sleep 40
-
-echo "Enabling OMERO 5.5-5.6 update site"
-"$fiji_path" --update add-update-site "OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
-
-sleep 40
-
-echo "Enabling StarDist update site"
-$fiji_path --update add-update-site "StarDist" "https://sites.imagej.net/StarDist/"
-
-sleep 40
-
-echo "Updating Fiji one last time" 
+echo "Installing update sites" 
 $fiji_path --update update
 echo "Fiji should now be up-to-date"
