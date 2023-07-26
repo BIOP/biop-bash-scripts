@@ -1,4 +1,4 @@
-# BIOP BASH SCRIPTS (BROKEN, NOTHING WORKS 2023/07/13, see https://github.com/imagej/imagej-updater/issues/106)
+# BIOP BASH SCRIPTS 
 
 This repository contains bash scripts which should ideally simplify your life when working with [QuPath]() and [Fiji](https://imagej.net/software/fiji/).
 
