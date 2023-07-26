@@ -9,7 +9,7 @@ function Help()
 {
    # Display Help
    echo ------ Fiji Installer Script -------------
-   echo "This batch file downloads and install Fiji on your computer."
+   echo "This script file downloads and installs Fiji on your computer."
    echo "Fiji is automatically updated after download "
    echo
    echo "You can specify the folder where to install Fiji as an "
@@ -17,6 +17,9 @@ function Help()
    echo ""
    echo "Windows:"
    echo "./install_fiji.sh C:/"
+   echo ""
+   echo "Mac:"
+   echo "./install_fiji.sh /Applications/"
    echo ""
    echo "If no path is specified, you will be asked for one."
    echo

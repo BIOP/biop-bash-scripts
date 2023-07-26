@@ -11,17 +11,11 @@ function Help()
    echo ------ Fiji Update Sites Installer Script -------------
    echo "This adds update sites to an existing Fiji install"
    echo "The following sites are automatically installed:"
-   echo "    - 3D Image Suite"  
-   echo "    - Bio-Formats"
-   echo "    - CSBDeep"
+   echo "    - PTBIOP"
+   echo "    - OMERO 5.5-5.6"
    echo "    - IBMP-CNRS"
    echo "    - IJPB-Plugins"
    echo "    - ImageScience"
-   echo "    - OMERO 5.5-5.6"
-   echo "    - PTBIOP"
-   echo "    - ilastik"
-   echo "    - Stardist"
-   echo "    - TensorFlow"
    echo
    echo "You need to specify the folder where Fiji is installed as an "
    echo "argument of this script. For instance: "
@@ -93,14 +87,14 @@ echo "Fiji updated"
 #    echo "Error in Fiji update"
 # fi
 
-# We need pauses between each update
-# https://forum.image.sc/t/repeated-imagej-updater-calls-cause-403-errors/76613 
-
 echo "Enabling update sites"
 "$fiji_path" --update add-update-sites \
 	"PTBIOP" "https://biop.epfl.ch/Fiji-Update" \
-	"StarDist" "https://sites.imagej.net/StarDist/" \
-	"OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/"
+	"OMERO 5.5-5.6" "https://sites.imagej.net/OMERO-5.5-5.6/" \
+	"IBMP-CNRS" "https://sites.imagej.net/Mutterer/" \
+	"IJPB-plugins" "https://sites.imagej.net/IJPB-plugins/" \
+	"ImageScience" "https://sites.imagej.net/ImageScience/"
+	
 
 echo "Installing update sites" 
 $fiji_path --update update
