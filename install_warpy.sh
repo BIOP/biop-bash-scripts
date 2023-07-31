@@ -1,6 +1,7 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
 source "$scriptpath/global_function.sh"
+source "$scriptpath/version_software_script.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -41,7 +42,7 @@ qupath_warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/relea
 
 echo ------ Warpy Installer Script -------------
 echo "This batch file downloads and install Warpy components on your computer"
-echo "See https://c4science.ch/w/warpy/"
+echo "See https://imagej.net/plugins/bdv/warpy/warpy"
 #  ------- INSTALLATION PATH VALIDATION and Check system if not already done
 if [ $# -eq 0 ] 
 then
