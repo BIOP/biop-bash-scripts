@@ -60,7 +60,7 @@ echo "- Warpy QuPath Extension: $warpy_extension_version"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
-mkdir "$temp_dl_dir"
+mkdir -p "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
@@ -119,9 +119,10 @@ echo "Fiji is now up-to-date"
 echo ------ Setting up Elastix ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	elastix_os_subpath="elastix-$elastix_version-linux"
+	elastix_executable_file="bin/elastix"
+	transformix_executable_file="bin/transformix"
+	elastix_url="https://github.com/SuperElastix/elastix/releases/download/${elastix_version}/elastix-${elastix_version}-linux.zip"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	elastix_os_subpath="elastix-$elastix_version-mac"
 	elastix_executable_file="bin/elastix"
@@ -152,11 +153,11 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 	    MSYS_NO_PATHCONV=1 reg query "HKLM\\SOFTWARE\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64" /v Major >dummy
 		errorlevel=$?
 		if [[ "$errorlevel" == "0" ]]; then
-		  echo "VS Redistributable is now installed."
+		    echo "VS Redistributable is now installed."
 		else 
-		  echo "Something went wrong during VS redistributable installation!"
-		  pause "Press [Enter] to end the script"
-		  exit 1 # We cannot proceed	  
+		    echo "Something went wrong during VS redistributable installation!"
+		    pause "Press [Enter] to end the script"
+		    exit 1 # We cannot proceed	  
 		fi
 	fi
 fi
@@ -167,10 +168,14 @@ transformix_path="$path_install/$elastix_os_subpath/$transformix_executable_file
 if [[ -f "$elastix_path" ]]; then
     echo "Elastix detected, bypassing installation"
 else
+	# MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
+	temp_dl_dir="$path_install/temp_dl"
+	mkdir -p "$temp_dl_dir"
 	echo "Elastix not present, downloading it from $elastix_url"
 	elastix_zip_path="$temp_dl_dir/elastix.zip"
 	curl "$elastix_url" -L -# -o "$elastix_zip_path"
-	echo "Unzipping Elastix in $path_install"
+	echo "Unzipping Elastix in $path_install" #Any archive of Elastix are not in one directory
+	mkdir -p "$path_install/$elastix_os_subpath/"
 	unzip "$elastix_zip_path" -d "$path_install"
 fi
 

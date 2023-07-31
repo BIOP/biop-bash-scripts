@@ -44,7 +44,7 @@ fi
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
-mkdir "$temp_dl_dir"
+mkdir -p "$temp_dl_dir"
 
 
 # ------ SETTING UP IMAGEJ/FIJI

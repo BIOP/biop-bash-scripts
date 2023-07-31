@@ -60,7 +60,7 @@ echo "- ABBA QuPath Extension: $abba_extension_version"
 
 # MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
 temp_dl_dir="$path_install/temp_dl"
-mkdir "$temp_dl_dir"
+mkdir -p "$temp_dl_dir"
 
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
@@ -94,7 +94,6 @@ fi
 echo ------ Setting up Elastix ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux beta supported - please contribute to this installer to support it!"
 	elastix_os_subpath="elastix-$elastix_version-linux"
 	elastix_executable_file="bin/elastix"
 	transformix_executable_file="bin/transformix"
@@ -145,11 +144,13 @@ if [[ -f "$elastix_path" ]]; then
     echo "Elastix detected, bypassing installation"
 else
 	echo "Elastix not present, downloading it from $elastix_url"
+	temp_dl_dir="$path_install/temp_dl"
+	mkdir -p "$temp_dl_dir"
 	elastix_zip_path="$temp_dl_dir/elastix.zip"
 	curl "$elastix_url" -L -# -o "$elastix_zip_path"
 	echo "Unzipping Elastix in $path_install" #Any archive of Elastix are not in one directory
-	mkdir "$path_install/$elastix_os_subpath/"
-	unzip "$elastix_zip_path" -d "$path_install/$elastix_os_subpath/"
+	mkdir -p "$path_install/$elastix_os_subpath/"
+	unzip "$elastix_zip_path" -d "$path_install"
 fi
 
 if [[ -f "$elastix_path" ]]; then
@@ -170,11 +171,25 @@ all_args="$argElastixPath,$argTransformixPath"
 echo ------ Setting up QuPath ------
 $scriptpath/install_qupath.sh "$path_install"
 
-echo ------ Setting up QuPath extension ------
+echo ------ Setting up QuPath extensions ------
 #TODO refine here verify if QPath is in directory define a QuPath dir where the version is not precised
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
 
+warpy_extension_url="https://github.com/BIOP/qupath-extension-warpy/releases/download/${warpy_extension_version}/qupath-extension-warpy-${warpy_extension_version}.zip"
+
+abba_extension_url="https://github.com/BIOP/qupath-extension-abba/releases/download/${abba_extension_version}/qupath-extension-abba-${abba_extension_version}.zip"
+
+echo "--- Installing Warpy extension"
+
+argQuPathExtensionURL="quPathExtensionURL=\"$warpy_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
+
+echo "--- Installing ABBA extension"
+
+argQuPathExtensionURL="quPathExtensionURL=\"$abba_extension_url\""
+all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
+echo "$all_args"
 "$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "Removing temporary download folder $temp_dl_dir"
