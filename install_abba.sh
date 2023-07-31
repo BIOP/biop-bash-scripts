@@ -1,6 +1,7 @@
 #!/bin/bash
 scriptpath=$(realpath $(dirname $0))
 source "$scriptpath/global_function.sh"
+source "$scriptpath/version_software_script.sh"
 
 ################################################################################
 # Help                                                                         #
@@ -65,6 +66,7 @@ mkdir "$temp_dl_dir"
 echo ------ Setting up ImageJ/Fiji ------
 . "$scriptpath/install_fiji.sh" "$path_install"
 fiji_path="$path_install/Fiji.app/$fiji_executable_file"
+
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
 echo "PTBIOP update site enabled"
@@ -72,10 +74,6 @@ echo "PTBIOP update site enabled"
 echo "Updating Fiji"
 "$fiji_path" --update update
 echo "Fiji updated"
-
-echo "Updating Fiji one last time" 
-"$fiji_path" --update update
-echo "Fiji is now up-to-date"
 
 echo "Setting up default ABBA atlases folder"
 
@@ -166,7 +164,7 @@ echo --- Setting Elastix and Transformix path in Fiji
 argElastixPath="elastixPath=\"$elastix_path\""
 argTransformixPath="transformixPath=\"$transformix_path\""
 all_args="$argElastixPath,$argTransformixPath"
-"$fiji_path" --ij2 --run SetElastixPath.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run SetElastixPath.groovy "$all_args"
 
 # ------ SETTING UP QUPATH ------
 echo ------ Setting up QuPath ------
@@ -177,7 +175,7 @@ echo ------ Setting up QuPath extension ------
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
 
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"

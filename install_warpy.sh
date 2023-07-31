@@ -105,7 +105,7 @@ echo "Fiji updated"
 
 echo "Enabling PTBIOP update site"
 "$fiji_path" --update add-update-site "PTBIOP" "https://biop.epfl.ch/Fiji-Update/"
-echo "Bigdataviewer-Playground update site enabled"
+echo "PTBIOP update site enabled"
 
 echo "Updating Fiji"
 "$fiji_path" --update update
@@ -186,7 +186,7 @@ echo --- Setting Elastix and Transformix path in Fiji
 argElastixPath="elastixPath=\"$elastix_path\""
 argTransformixPath="transformixPath=\"$transformix_path\""
 all_args="$argElastixPath,$argTransformixPath"
-"$fiji_path" --ij2 --run SetElastixPath.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run SetElastixPath.groovy "$all_args"
 
 # ------ SETTING UP QUPATH ------
 echo ------ Setting up QuPath ------
@@ -246,7 +246,7 @@ argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.4\""
 argQuPathExtensionURL="quPathExtensionURL=\"$qupath_warpy_extension_url\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "Removing temporary download folder $temp_dl_dir"
 rm -r "$temp_dl_dir"

@@ -124,39 +124,39 @@ echo ------ Setting up QuPath extension ------
 echo "--- Installing BIOP extension"
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing Cellpose extension"
 argQuPathExtensionURL="quPathExtensionURL=\"$cellpose_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing Warpy extension"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$warpy_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing ABBA extension"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$abba_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing Stardist extension"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$stardist_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo "--- Installing Stardist extension"
 
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_extension_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo -------- INSTALLATION OF OMERO DEPENDENCIES ---------
 
@@ -165,7 +165,7 @@ biop_omero_dependencies_url="https://github.com/ome/openmicroscopy/releases/down
 argQuPathExtensionURL="quPathExtensionURL=\"$biop_omero_dependencies_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
 echo "$all_args"
-"$fiji_path" --ij2 --run InstallQuPathExtension.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathExtension.groovy "$all_args"
 
 echo -------- INSTALLATION OF QUPATH BIOP SHARED SCRIPTS ---------
 
@@ -174,6 +174,6 @@ biop_qupath_scripts_url="https://github.com/BIOP/qupath-scripts/archive/refs/hea
 argQuPathScriptsURL="quPathScriptsURL=\"$biop_qupath_scripts_url\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathScriptsURL,$argQuitAfterInstall"
 echo "$all_args"
-"$fiji_path" --ij2 --run InstallQuPathScripts.groovy "$all_args"
+"$fiji_path" --ij2 --headless --run InstallQuPathScripts.groovy "$all_args"
 
 echo ------ INSTALLATION DONE ------
