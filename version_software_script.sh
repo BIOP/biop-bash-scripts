@@ -8,7 +8,7 @@ abba_extension_version=0.1.4
 elastix_version=5.0.1
 biop_extension_version=2.0.0
 cellpose_extension_version=0.7.0
-warpy_extension_version=0.2.6
+warpy_extension_version=0.2.7
 stardist_extension_version=0.4.0
 biop_omero_extension_version=0.5.0
 
