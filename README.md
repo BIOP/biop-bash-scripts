@@ -91,7 +91,7 @@ Adds a selection of update sites to the predownloaded Fiji. To know (or modify) 
 
 **Warning: Fiji needs to be installed on the same path**
 
-This script downloads and install QuPath version v0.3.
+This script downloads and install QuPath version v0.4.4.
 
 ### install_qupath
 
