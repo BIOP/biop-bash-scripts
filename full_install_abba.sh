@@ -50,6 +50,6 @@ else
 	path_validation $1
 fi
 
-scriptname=$(realpath $(dirname $0))
-. "$scriptname/install_abba.sh" "$path_install"
-. "$scriptname/install_abba_atlases.sh" "$path_install"
+
+. "$scriptpath/install_abba.sh" "$path_install"
+. "$scriptpath/install_abba_atlases.sh" "$path_install"
