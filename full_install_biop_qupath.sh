@@ -1,5 +1,11 @@
 #!/bin/bash
-scriptpath=$(realpath $(dirname $0))
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    scriptpath=$(realpath $(dirname $0))
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    scriptpath=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+elif [[ "$OSTYPE" == "msys" ]]; then
+    scriptpath=$(realpath $(dirname $0))
+fi
 source "$scriptpath/global_function.sh"
 
 ################################################################################

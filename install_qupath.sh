@@ -1,7 +1,11 @@
 #!/bin/bash
-
-# ----------------- COMPONENTS VERSION -----------
-scriptpath=$(realpath $(dirname $0))
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    scriptpath=$(realpath $(dirname $0))
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    scriptpath=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+elif [[ "$OSTYPE" == "msys" ]]; then
+    scriptpath=$(realpath $(dirname $0))
+fi
 source "$scriptpath/version_software_script.sh" # Versions need to be sourced before global function!
 source "$scriptpath/global_function.sh"
 
