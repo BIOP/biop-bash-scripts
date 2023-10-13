@@ -62,10 +62,6 @@ echo "- QuPath version: $qupath_version"
 echo "- Elastix version: $elastix_version"
 echo "- ABBA QuPath Extension: $abba_extension_version"
 
-# MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
-temp_dl_dir="$path_install/temp_dl"
-mkdir -p "$temp_dl_dir"
-
 # ------ SETTING UP IMAGEJ/FIJI
 echo ------ Setting up ImageJ/Fiji ------
 . "$scriptpath/install_fiji.sh" "$path_install"
@@ -80,6 +76,11 @@ echo "Updating Fiji"
 echo "Fiji updated"
 
 echo "Setting up default ABBA atlases folder"
+
+# MAKE TEMP FOLDER IN CASE DOWNLOADS ARE NECESSARY
+# temp_dl_dir is remove above
+temp_dl_dir="$path_install/temp_dl"
+mkdir -p "$temp_dl_dir"
 
 # ------ SETTING UP abba_atlases
 mkdir -p "$path_install/abba_atlases"
@@ -123,6 +124,8 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 		echo "VS Redistributable is installed."
 	else 
 		echo "VS Redistributable is not installed - downloading it"
+		echo "test"
+		ls "$temp_dl_dir"
 		vc_redist_url="https://aka.ms/vs/16/release/vc_redist.x64.exe"
 		vc_redist_path="$temp_dl_dir/vc_redist_install.exe"
 		curl "$vc_redist_url" -L -# -o "$vc_redist_path"
@@ -151,6 +154,7 @@ else
 	temp_dl_dir="$path_install/temp_dl"
 	mkdir -p "$temp_dl_dir"
 	elastix_zip_path="$temp_dl_dir/elastix.zip"
+	echo  "curl in $elastix_zip_path"
 	curl "$elastix_url" -L -# -o "$elastix_zip_path"
 	echo "Unzipping Elastix in $path_install" #Any archive of Elastix are not in one directory
 	mkdir -p "$path_install/$elastix_os_subpath/"
