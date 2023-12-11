@@ -1,5 +1,5 @@
 /**
- * Fiji script installing a QuPath extension (QuPath v0.3)
+ * Fiji script installing a QuPath extension (QuPath v0.5)
  * 
  * Yes it looks weird but it makes sense, because modifying QuPath jars from within QuPath creates issues:
  * jars files are in use, so they can't be deleted.
@@ -40,7 +40,7 @@
  **/ 
 
 #@String(label="QuPath User Folder", value="C:/QuPath Common Data") defaultQuPathUserPath
-#@String(label="QuPath Prefs Node", value="io.github.qupath/0.3") quPathPrefsNode
+#@String(label="QuPath Prefs Node", value="io.github.qupath/0.5") quPathPrefsNode
 #@String(label="URL of QuPath Extension to install") quPathExtensionURL
 #@Boolean(lable="Quit after installation") quitAfterInstall
 
