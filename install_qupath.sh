@@ -57,7 +57,7 @@ echo ------ Setting up QuPath ------
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "Linux beta supported - please contribute to this installer to support it!"
 	qupath_executable_file="QuPath"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Linux.tar.xz"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Linux.tar.xz"
 	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
@@ -94,7 +94,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
 	else
-		qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
+		qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Mac-x64.pkg"
 		echo "QuPath not present, downloading it from $qupath_url"
 		qupath_zip_path="$temp_dl_dir/qupath.pkg"
 		curl "$qupath_url" -L -# -o "$qupath_zip_path"
@@ -110,7 +110,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
 elif [[ "$OSTYPE" == "msys" ]]; then
 	qupath_executable_file="QuPath-${qupath_version}.exe"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Windows.zip"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Windows.zip"
 	qupath_path="$path_install/QuPath-${qupath_version}/$qupath_executable_file"
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
