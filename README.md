@@ -2,7 +2,7 @@
 
 This repository contains bash scripts which should ideally simplify your life when working with [QuPath]() and [Fiji](https://imagej.net/software/fiji/).
 
-> Windows and  Mac-OSX supported, contributions for Linux welcomed, added in beta mode!
+> Windows and  Mac-OSX supported, Linux support added thanks to @hedjour
 
 These scripts should automatically download (internet connection required!), install, update and configure several tools, in a platform independent manner.
 
@@ -19,7 +19,7 @@ You need to right-click a `.command` file and select `Open`. Then you can force 
 If you get an error message, please [grant the terminal application with full disk access](https://osxdaily.com/2018/10/09/fix-operation-not-permitted-terminal-error-macos/)
 
 ## Linux
-Simply executing the sh scripts should work, but this has not been tested.
+Simply execute the sh scripts.
 
 ## Scripts help
 You can get a help for any of these bash scripts on a terminal with:
