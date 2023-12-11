@@ -11,6 +11,7 @@ cellpose_extension_version=0.9.0
 warpy_extension_version=0.3.0
 stardist_extension_version=0.5.0
 biop_omero_extension_version=0.8.0
+omero_ij_version=5.8.3
 
 #QuPath arguments :
 argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath_Common_Data_0.5\""

@@ -90,13 +90,14 @@ def url = new URL(quPathExtensionURL)
 String fName = FilenameUtils.getName(url.getPath())
 String extension = FilenameUtils.getExtension(url.getPath())
 
-def isOmeroDependencies = false
+/*def isOmeroDependencies = false
 
 // Download all OMERO jars is long. We do not want to redo it, unless the version is new.
-if (fName.contains("OMERO.java-")) {
+if (fName.contains("omero_ij")) {
 	isOmeroDependencies = true
 	IJ.log("It's the OMERO dependencies... checking if they are already installed");
 	// https://github.com/ome/openmicroscopy/releases/download/v5.6.5/OMERO.java-5.6.5-ice36-b233.zip
+	// https://github.com/ome/omero-insight/releases/download/v5.8.3/omero_ij-5.8.3-all.jar
 	def expectedFolderName = fName.substring(0, fName.length()-4)
 	def expectedOmeroFolderDependencies = new File(extensionsDir,expectedFolderName)
 	if (expectedOmeroFolderDependencies.exists()) {
@@ -109,7 +110,7 @@ if (fName.contains("OMERO.java-")) {
 	} else {
 		IJ.log("Java OMERO depedencies are not installed - installing now...");
 	}	
-}
+}*/
 
 
 def outputFile = new File(extensionsDir, fName)
@@ -153,9 +154,9 @@ if (extension.equals("zip")) {
 
 // Cleans old jars
 
-// REGEX: (.+)-([0-9]+).([0-9]+)?.([0-9]+)?(-SNAPSHOT)?(\.jar) to get jars versions:
+// REGEX: (.+)-([0-9]+).([0-9]+)?.([0-9]+)?(-all)?(\.jar) to get jars versions:
 // name-0.1.0.jar if it doesn't match it's ignored
-def pattern_expression = '(.+)-([0-9]+).([0-9]+)?.([0-9]+)?(-SNAPSHOT)?(\\.jar)'
+def pattern_expression = '(.+)-([0-9]+).([0-9]+)?.([0-9]+)?(-all)?(\\.jar)'
 Pattern pattern = Pattern.compile(pattern_expression);
 
 Map<String, RepoAndVersion> jarsMaxVersion = new HashMap();
