@@ -1,5 +1,5 @@
 /**
- * Fiji script installing the content of a repo as shared scripts in QuPath v0.3
+ * Fiji script installing the content of a repo as shared scripts in QuPath v0.5
  * 
  * QuPath uses Java user preferences, which can be easily accessed for any Java software (like Fiji!)
  * Thus, this script can look whether a QuPath user path is already defined, and adds the jars 
@@ -24,7 +24,7 @@
  **/ 
 
 #@String(label="QuPath User Folder", value="C:/QuPath Common Data") defaultQuPathUserPath
-#@String(label="QuPath Prefs Node", value="io.github.qupath/0.3") quPathPrefsNode
+#@String(label="QuPath Prefs Node", value="io.github.qupath/0.5") quPathPrefsNode
 #@String(label="URL of QuPath Scripts Repo to install") quPathScriptsURL
 #@Boolean(lable="Quit after installation") quitAfterInstall
 
