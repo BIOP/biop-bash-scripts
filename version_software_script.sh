@@ -4,7 +4,7 @@
 #Software version number
 
 qupath_version=0.5.0
-abba_extension_version=0.3.0
+abba_extension_version=0.3.1
 elastix_version=5.0.1
 biop_extension_version=3.0.2
 cellpose_extension_version=0.9.0
