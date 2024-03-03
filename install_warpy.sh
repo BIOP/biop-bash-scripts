@@ -202,12 +202,40 @@ all_args="$argElastixPath,$argTransformixPath"
 echo ------ Setting up QuPath ------
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	echo "Linux unsupported - please contribute to this installer to support it!"
-	pause "Press [Enter] to end the script"
-	exit 1 # We cannot proceed
+	qupath_executable_file="QuPath"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Linux.tar.xz"
+	qupath_path="$path_install/QuPath/bin/$qupath_executable_file"
+	if [[ -f "$qupath_path" ]]; then
+		echo "QuPath detected, bypassing installation"
+	else
+		echo "QuPath not present, downloading it from $qupath_url"
+		qupath_zip_path="$temp_dl_dir/QuPath-${qupath_version}-Linux.tar.xz"
+		curl "$qupath_url" -L -# -o "$qupath_zip_path"
+		echo "Unzipping QuPath"
+		tar -f "$qupath_zip_path" -C "$path_install/" -xv
+		echo "We give execution right"
+		chmod u+x "$path_install/QuPath/bin/QuPath"
+		chmod u+x "$path_install/QuPath/bin/QuPath.sh"
+		echo "[Desktop Entry]
+Type=Application
+Name=QuPath
+Comment=QuPath
+Icon=$path_install/QuPath/lib/QuPath.png
+Exec=$qupath_path.sh
+Terminal=false  #ouvrir ou non un terminal lors de l'exécution du programme (false ou true)
+StartupNotify=false  #notification de démarrage ou non (false ou true)
+Categories=Analyse image  #Exemple: Categories=Application;;" > ~/.local/share/applications/QuPath.desktop
+		if [[ -f "$qupath_path" ]]; then
+			echo "QuPath successfully installed"
+		else
+			echo "QuPath installation failed, please retry with administrator rights or install in a folder requiring less priviledge"
+			pause "Press [Enter] to end the script"
+			exit 1 # We cannot proceed
+		fi
+	fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	qupath_executable_file="Contents/MacOS/QuPath"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Mac.pkg"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Mac.pkg"
 	qupath_path="/Applications/QuPath.app/$qupath_executable_file"
 	echo "$qupath_path"
 	if [[ -f "$qupath_path" ]]; then
@@ -228,7 +256,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
 elif [[ "$OSTYPE" == "msys" ]]; then
 	qupath_executable_file="QuPath-${qupath_version}.exe"
-	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-${qupath_version}-Windows.zip"
+	qupath_url="https://github.com/qupath/qupath/releases/download/v${qupath_version}/QuPath-v${qupath_version}-Windows.zip"
 	qupath_path="$path_install/QuPath-${qupath_version}/$qupath_executable_file"
 	if [[ -f "$qupath_path" ]]; then
 		echo "QuPath detected, bypassing installation"
@@ -251,8 +279,8 @@ fi
 echo ------ Setting up QuPath extension ------
 
 # See https://imagej.net/scripting/headless to deal with the mess of single quotes vs double quotes
-argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.4\""
-argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.4\""
+argQuPathUserPath="defaultQuPathUserPath=\"$path_install/QuPath Common Data_0.5\""
+argQuPathPrefNode="quPathPrefsNode=\"io.github.qupath/0.5\""
 argQuPathExtensionURL="quPathExtensionURL=\"$qupath_warpy_extension_url\""
 argQuitAfterInstall="quitAfterInstall=\"true\""
 all_args="$argQuPathUserPath,$argQuPathPrefNode,$argQuPathExtensionURL,$argQuitAfterInstall"
