@@ -265,7 +265,7 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 		qupath_zip_path="$temp_dl_dir/qupath.zip"
 		curl "$qupath_url" -L -# -o "$qupath_zip_path"
 		echo "Unzipping QuPath"
-		unzip "$qupath_zip_path" -d "$path_install"
+		unzip "$qupath_zip_path" -d "$path_install/QuPath-${qupath_version}"
 		if [[ -f "$qupath_path" ]]; then
 			echo "QuPath successfully installed"
 		else
